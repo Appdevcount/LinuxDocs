@@ -1,0 +1,68 @@
+# Step 1: Specify your base/parent docker image that will be used to build the actual application  in FROM instruction.. build, publish,base,final aliases are stage names
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+
+
+
+# Step 2: Copy project file to the /src container folder
+#Create Virtual directory in container
+#WORKDIR /src
+WORKDIR /src
+#COPY files from host to container virtual directory /src
+#COPY ["src/WebApi/WebApi.csproj", "WebApi/"]
+COPY . ./ 
+
+# Step 3: Run a restore to download dependencies .. Generally RUN is used in package/application installation in new layer
+# Restore as distinct layers
+#RUN dotnet restore 
+RUN dotnet restore "src/WebApi/WebApi.csproj"
+
+# Step 4: Copy app code to the container
+# Copy everything
+#COPY src/WebApi/bin/debug/net6.0/publish/ ./
+#COPY . . 
+#WORKDIR "/src/WebApi"
+
+# Step 5: Build the app in Release mode
+RUN dotnet build "src/WebApi/WebApi.csproj" -c Release -o /App/build
+
+# Step 6: Publish the application in Release mode
+#This stage is used to publish your application.
+FROM build AS publish
+#RUN dotnet publish -c Release -o out
+RUN dotnet publish "src/WebApi/WebApi.csproj" -c Release -o /App/publish
+#Untill this level in this stage.. it just creates the final application artifact (/App/publish) along with src and build tools
+
+# Step 8: Move the /app folder and run the compiled app
+# This stage defines the base runtime image that will be used to run your application. 
+#It contains the minimal dependencies to run your application
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+FROM base AS final
+#This stage actually deploy to production. It is based on the required runtime base image, along with the published artifcacts(/App/publish) copied from "publish" aliased stage/layer/image to containerrootOrWorkDir(.)
+WORKDIR /App
+COPY --from=publish /App/publish .
+# Step IN FIRST STAGE: Expose port 5000 in the container
+#add an environment variable to the service container image.
+#The instruction should be placed in the base stage of the Dockerfile (the first stage in the file)
+EXPOSE 5000
+#Expose application Url Port
+ENV ASPNETCORE_URLS=http://+:5000
+ENV ASPNETCORE_ENVIRONMENT Development
+ENTRYPOINT ["dotnet", "WebApi.dll"]
+#RUN Generally is used in package/application installation in new layer.. RUN apt-get -y update && ["apt-get","install","apache2"]
+#CMD Command is used to set default commands for the container which can be overidden in runtime..only bash does it and not shell.. CMD echo "helloworld" && ["/bin/echo","helloworld"]
+#ENTRYPOINT(similar to CMD) helps in configuring container to run in executable form with some default commands tu run always when starting the conatiner  .. ENTRYPOINT echo "helloworld" && ["/bin/echo","helloworld"]
+#All can be in SHELL FORM
+#<instruction> <commmand>
+#All can be in EXECUTABLE FORM
+#<instruction> ["executable","param1","param2",...]
+
+
+
+#Multi-stage builds are always best-practice when you're deploying to Docker,
+# but this one is more complex than it needs to be in general. 
+#It has additional stages to make it quicker for Visual Studio to develop inside Docker images too, 
+#using "fast mode". If you're only deploying to Docker, not developing in Docker, then you can simplify this file.
+
+#Every "FROM" instruction in dockerfile is a new STAGE/LAYER added to existing layer .. 
+#we are trying to use previous stage output in subsequent stage to created a smaller/reduced size image
+

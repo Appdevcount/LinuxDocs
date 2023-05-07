@@ -1,0 +1,184 @@
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker build -t appcount/webiapiimage:1 -p 8000:5000 -f dockerfile.Dev
+unknown shorthand flag: 'p' in -p
+See 'docker buildx build --help'.
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker build -t appcount/webiapiimage:1 -f dockerfile.Dev
+ERROR: "docker buildx build" requires exactly 1 argument.
+See 'docker buildx build --help'.
+
+Usage:  docker buildx build [OPTIONS] PATH | URL | -
+
+Start a build
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker build -t appcount/webiapiimage:1 -f dockerfile.Dev
+ERROR: "docker buildx build" requires exactly 1 argument.
+See 'docker buildx build --help'.
+
+Usage:  docker buildx build [OPTIONS] PATH | URL | -
+
+Start a build
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker build -t appcount/webiapiimage:1 -f dockerfile.Dev .
+[+] Building 41.8s (15/15) FINISHED
+ => [internal] load .dockerignore                                                                                                   0.1s
+ => => transferring context: 2B                                                                                                     0.0s
+ => [internal] load build definition from dockerfile.Dev                                                                            0.1s
+ => => transferring dockerfile: 3.37kB                                                                                              0.0s
+ => [internal] load metadata for mcr.microsoft.com/dotnet/aspnet:6.0                                                                0.9s
+ => [internal] load metadata for mcr.microsoft.com/dotnet/sdk:6.0                                                                   0.9s
+ => [build 1/5] FROM mcr.microsoft.com/dotnet/sdk:6.0@sha256:f6f276c7fb4cd310d784f9568bd09f7a336539bcbb48dcf63ed52dd1240bc18e       0.0s
+ => [internal] load build context                                                                                                   0.1s
+ => => transferring context: 828.89kB                                                                                               0.0s
+ => [base 1/1] FROM mcr.microsoft.com/dotnet/aspnet:6.0@sha256:ae088fa9722a1e5f6e0a7c92244bbf527ee080745208950492f7df61f0b30390     0.0s
+ => CACHED [build 2/5] WORKDIR /src                                                                                                 0.0s
+ => [build 3/5] COPY . ./                                                                                                           0.3s
+ => [build 4/5] RUN dotnet restore "src/WebApi/WebApi.csproj"                                                                      20.4s
+ => [build 5/5] RUN dotnet build "src/WebApi/WebApi.csproj" -c Release -o /App/build                                               14.1s
+ => [publish 1/1] RUN dotnet publish "src/WebApi/WebApi.csproj" -c Release -o /App/publish                                          5.7s
+ => CACHED [final 1/2] WORKDIR /App                                                                                                 0.0s
+ => CACHED [final 2/2] COPY --from=publish /App/publish .                                                                           0.0s
+ => exporting to image                                                                                                              0.0s
+ => => exporting layers                                                                                                             0.0s
+ => => writing image sha256:3fc1b6ffe8e05158422236c7de30012297e7a3f27b63af6fd216a4f49d5890a8                                        0.0s
+ => => naming to docker.io/appcount/webiapiimage:1                                                                                  0.0s
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker images
+REPOSITORY              TAG       IMAGE ID       CREATED        SIZE
+appcount/webiapiimage   1         3fc1b6ffe8e0   27 hours ago   213MB
+node                    latest    acd15857ce39   3 days ago     1GB
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker run --name webapicontainer appcount/webiapiimage:1 -p 8000:5000
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://[::]:5000
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /App/
+^Cinfo: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker ps -a
+CONTAINER ID   IMAGE                     COMMAND                  CREATED         STATUS                     PORTS     NAMES
+a09dbff1bcb1   appcount/webiapiimage:1   "dotnet WebApi.dll -…"   2 minutes ago   Exited (0) 5 seconds ago             webapicontainer
+55ce8932220c   node                      "docker-entrypoint.s…"   2 days ago      Exited (0) 2 days ago                dreamy_germain
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker run --name webapicontainer appcount/webiapiimage:1 -p 8000:5000
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://[::]:5000
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /App/
+^Cinfo: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker inspect 3fc1b6ffe8e0
+[
+    {
+        "Id": "sha256:3fc1b6ffe8e05158422236c7de30012297e7a3f27b63af6fd216a4f49d5890a8",
+        "RepoTags": [
+            "appcount/webiapiimage:1"
+        ],
+        "RepoDigests": [],
+        "Parent": "",
+        "Comment": "buildkit.dockerfile.v0",
+        "Created": "2023-05-06T15:59:07.449189236Z",
+        "Container": "",
+        "ContainerConfig": {
+            "Hostname": "",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": null,
+            "Cmd": null,
+            "Image": "",
+            "Volumes": null,
+            "WorkingDir": "",
+            "Entrypoint": null,
+            "OnBuild": null,
+            "Labels": null
+        },
+        "DockerVersion": "",
+        "Author": "",
+        "Config": {
+            "Hostname": "",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "ExposedPorts": {
+                "5000/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "ASPNETCORE_URLS=http://+:5000",
+                "DOTNET_RUNNING_IN_CONTAINER=true",
+                "DOTNET_VERSION=6.0.16",
+                "ASPNET_VERSION=6.0.16",
+                "ASPNETCORE_ENVIRONMENT=Development"
+            ],
+            "Cmd": null,
+            "Image": "",
+            "Volumes": null,
+            "WorkingDir": "/App",
+            "Entrypoint": [
+                "dotnet",
+                "WebApi.dll"
+            ],
+            "OnBuild": null,
+            "Labels": null
+        },
+        "Architecture": "amd64",
+        "Os": "linux",
+        "Size": 212698133,
+        "VirtualSize": 212698133,
+        "GraphDriver": {
+            "Data": {
+                "LowerDir": "/var/lib/docker/overlay2/s706rnte9kg7c8u4ic02e4wds/diff:/var/lib/docker/overlay2/59d88fe4798fce0c0df189cd47c1147aa1e4a911bcf40fbf5cc9bbb7df29edfb/diff:/var/lib/docker/overlay2/ee39679cbf4574814ec922453b8cd8861affd1210f9056d840211c6ea4400fef/diff:/var/lib/docker/overlay2/ed43753a771db91c0a8b2a1661e45f05297a877a6255b15af1f25fbab96d7735/diff:/var/lib/docker/overlay2/85bc8ae6494460dc4340ce8e7d7482f4426e608cdd88e2c414754b93a2bbf5cc/diff:/var/lib/docker/overlay2/ccc7741d78b6ebd31ceaf908d5a581aaa437b09155079166cd6055e7fd857c71/diff",
+                "MergedDir": "/var/lib/docker/overlay2/63lbdcdyrpjg3axjbjwoubz1r/merged",
+                "UpperDir": "/var/lib/docker/overlay2/63lbdcdyrpjg3axjbjwoubz1r/diff",
+                "WorkDir": "/var/lib/docker/overlay2/63lbdcdyrpjg3axjbjwoubz1r/work"
+            },
+            "Name": "overlay2"
+        },
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:8553b91047dad45bedc292812586f1621e0a464a09a7a7c2ce6ac5f8ba2535d7",
+                "sha256:b224b13a335e31c152e58c87bb237b9df70c0f8684935bce865af9d2d06e3cfc",
+                "sha256:39a43ba957e5bc5383c0a84b5e29e732df565b0f37a1bf4385d786a00f1fb68b",
+                "sha256:a51547ae5e97de9c97e9804cafa056e38506f676ab074c8c9d18219f3037429a",
+                "sha256:0ccc3c25b88392478787f9ad03942fa5dd39b65b12c088878bee82feca88c1b9",
+                "sha256:8f5e8d0a39871492fcc9299b2022a7e5251ef3e340721d5f2837b8c159b191de",
+                "sha256:f12b795108298f6efaa687e382e4c5db120707dcdc07802b4f6811eddf73737a"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "2023-05-07T18:59:58.271849115Z"
+        }
+    }
+]
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker run -p 8000:5000 --name webapicontainer appcount/webiapiimage1:1
+Unable to find image 'appcount/webiapiimage1:1' locally
+docker: Error response from daemon: manifest for appcount/webiapiimage1:1 not found: manifest unknown: manifest unknown.
+See 'docker run --help'.
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker run -p 8000:5000 --name webapicontainer1 appcount/webiapiimage:1
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://[::]:5000
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /App/
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]
+      Failed to determine the https port for redirect.
+^Cinfo: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ #********* port mapping should be specified before container name in docker run command as
+above .. otherwise the port mapping for the url with host won't happen

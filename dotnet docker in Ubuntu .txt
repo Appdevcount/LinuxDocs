@@ -1,0 +1,443 @@
+<3>WSL (426) ERROR: CreateProcessEntryCommon:357: getpwnam(myusername) failed 0
+Welcome to Ubuntu 22.04.2 LTS (GNU/Linux 5.15.90.1-microsoft-standard-WSL2 x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+ * Strictly confined Kubernetes makes edge and IoT secure. Learn how MicroK8s
+   just raised the bar for easy, resilient and secure K8s cluster deployment.
+
+   https://ubuntu.com/engage/secure-kubernetes-at-the-edge
+
+This message is shown once a day. To disable it please create the
+/home/wsllinux/.hushlogin file.
+wsllinux@HomeTechPAD:~$ mkdir dotnetProjects
+wsllinux@HomeTechPAD:~$ ls
+dotnetProjects  test.txt
+wsllinux@HomeTechPAD:~$ cd /dotnetProjects
+-bash: cd: /dotnetProjects: No such file or directory
+wsllinux@HomeTechPAD:~$ ls
+dotnetProjects  test.txt
+wsllinux@HomeTechPAD:~$ cd dotnetProjects
+wsllinux@HomeTechPAD:~/dotnetProjects$ ls
+wsllinux@HomeTechPAD:~/dotnetProjects$ cd dotnetProjects #change to subdirectory in linux
+-bash: cd: dotnetProjects: No such file or directory
+wsllinux@HomeTechPAD:~/dotnetProjects$ mkdir TestAPI
+wsllinux@HomeTechPAD:~/dotnetProjects$ cd TestAPI
+wsllinux@HomeTechPAD:~/dotnetProjects/TestAPI$ code . #Command to open VSCode from this folder
+wsllinux@HomeTechPAD:~/dotnetProjects/TestAPI$ dotnet --info
+.NET SDK (reflecting any global.json):
+ Version:   6.0.116
+ Commit:    b605cc131f
+
+Runtime Environment:
+ OS Name:     ubuntu
+ OS Version:  22.04
+ OS Platform: Linux
+ RID:         ubuntu.22.04-x64
+ Base Path:   /usr/lib/dotnet/sdk/6.0.116/
+
+global.json file:
+  Not found
+
+Host:
+  Version:      6.0.16
+  Architecture: x64
+  Commit:       1e620a42e7
+
+.NET SDKs installed:
+  6.0.116 [/usr/lib/dotnet/sdk]
+
+.NET runtimes installed:
+  Microsoft.AspNetCore.App 6.0.16 [/usr/lib/dotnet/shared/Microsoft.AspNetCore.App]
+  Microsoft.NETCore.App 6.0.16 [/usr/lib/dotnet/shared/Microsoft.NETCore.App]
+
+Download .NET:
+  https://aka.ms/dotnet-download
+
+Learn about .NET Runtimes and SDKs:
+  https://aka.ms/dotnet/runtimes-sdk-info
+wsllinux@HomeTechPAD:~/dotnetProjects/TestAPI$ dotnet new sln
+
+Welcome to .NET 6.0!
+---------------------
+SDK Version: 6.0.116
+
+----------------
+Installed an ASP.NET Core HTTPS development certificate.
+To trust the certificate run 'dotnet dev-certs https --trust' (Windows and macOS only).
+Learn about HTTPS: https://aka.ms/dotnet-https
+----------------
+Write your first app: https://aka.ms/dotnet-hello-world
+Find out what's new: https://aka.ms/dotnet-whats-new
+Explore documentation: https://aka.ms/dotnet-docs
+Report issues and find source on GitHub: https://github.com/dotnet/core
+Use 'dotnet --help' to see available commands or visit: https://aka.ms/dotnet-cli
+--------------------------------------------------------------------------------------
+The template "Solution File" was created successfully.
+wsllinux@HomeTechPAD:~/dotnetProjects/TestAPI$ dotnet new webapi -o API
+The template "ASP.NET Core Web API" was created successfully.
+
+Processing post-creation actions...
+Running 'dotnet restore' on /home/wsllinux/dotnetProjects/TestAPI/API/API.csproj...
+  Determining projects to restore...
+  Restored /home/wsllinux/dotnetProjects/TestAPI/API/API.csproj (in 8.75 sec).
+Restore succeeded.
+
+wsllinux@HomeTechPAD:~/dotnetProjects/TestAPI$ LS
+LS: command not found
+wsllinux@HomeTechPAD:~/dotnetProjects/TestAPI$ ls
+API  TestAPI.sln
+wsllinux@HomeTechPAD:~/dotnetProjects/TestAPI$ dotnet new sln -n WebApi -o WebApi
+The template "Solution File" was created successfully.
+wsllinux@HomeTechPAD:~/dotnetProjects/TestAPI$ cd ..
+wsllinux@HomeTechPAD:~/dotnetProjects$ rmdir TestAPI
+wsllinux@HomeTechPAD:~/dotnetProjects$ LS
+LS: command not found
+wsllinux@HomeTechPAD:~/dotnetProjects$ ls
+wsllinux@HomeTechPAD:~/dotnetProjects$ dotnet new sln -n WebApi -o WebApi
+The template "Solution File" was created successfully.
+wsllinux@HomeTechPAD:~/dotnetProjects$ cd WebApi
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ ls
+WebApi.sln
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ md src
+md: command not found
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ mkdir src
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ dotnet new webapi -n WebApi -o src/WebApi --use-program-main true
+The template "ASP.NET Core Web API" was created successfully.
+
+Processing post-creation actions...
+Running 'dotnet restore' on /home/wsllinux/dotnetProjects/WebApi/src/WebApi/WebApi.csproj...
+  Determining projects to restore...
+  Restored /home/wsllinux/dotnetProjects/WebApi/src/WebApi/WebApi.csproj (in 294 ms).
+Restore succeeded.
+
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ dotnet sln add src/WebApi/WebApi.csproj
+Project `src/WebApi/WebApi.csproj` added to the solution.
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ dotnet build
+Microsoft (R) Build Engine version 17.0.1+b177f8fa7 for .NET
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  WebApi -> /home/wsllinux/dotnetProjects/WebApi/src/WebApi/bin/Debug/net6.0/WebApi.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:08.78
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ code .
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ dotnet run --project src/WebApi/WebApi.csproj
+Building...
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: https://localhost:7298
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://localhost:5111
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /home/wsllinux/dotnetProjects/WebApi/src/WebApi/
+^Cinfo: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ dotnet run --project src/WebApi/WebApi.csproj
+Building...
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: https://localhost:7298
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://localhost:5111
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /home/wsllinux/dotnetProjects/WebApi/src/WebApi/
+^Cinfo: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ vi Dockerfile
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ cat Dockerfile
+FROM mcr.microsoft.com/dotnet/aspnet:6.0
+COPY bin/debug/net6.0/publish/ App/
+WORKDIR /App
+ENTRYPOINT ["dotnet", "WebAPI.dll"]
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ #build docker image using command => docker build -t [name]:[tag] [location|.|build image using files in current path] -f [file]
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ #Give a tag to existing image using command => docker tag [image] [image]:[tag]
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker build -t appcount/testwebapi:1 -f Dockerfile .
+[+] Building 1.9s (6/7)
+ => [internal] load build definition from Dockerfile                                                                                0.2s
+ => => transferring dockerfile: 163B                                                                                                0.0s
+ => [internal] load .dockerignore                                                                                                   0.2s
+ => => transferring context: 2B                                                                                                     0.0s
+ => [internal] load metadata for mcr.microsoft.com/dotnet/aspnet:6.0                                                                1.4s
+ => [internal] load build context                                                                                                   0.1s
+ => => transferring context: 2B                                                                                                     0.0s
+ => CANCELED [1/3] FROM mcr.microsoft.com/dotnet/aspnet:6.0@sha256:ae088fa9722a1e5f6e0a7c92244bbf527ee080745208950492f7df61f0b3039  0.2s
+ => => resolve mcr.microsoft.com/dotnet/aspnet:6.0@sha256:ae088fa9722a1e5f6e0a7c92244bbf527ee080745208950492f7df61f0b30390          0.0s
+ => => sha256:ae088fa9722a1e5f6e0a7c92244bbf527ee080745208950492f7df61f0b30390 1.82kB / 1.82kB                                      0.0s
+ => => sha256:f0e09ce0171a19e1b28abcb7f177322bb93216a2b52b66a8076b590725314706 1.37kB / 1.37kB                                      0.0s
+ => => sha256:d659aef489bb5d1983df27b84ea0f508c387d41c7ce12e809a75f2efdbb56c7f 3.26kB / 3.26kB                                      0.0s
+ => ERROR [2/3] COPY bin/debug/net6.0/publish/ App/                                                                                 0.0s
+------
+ > [2/3] COPY bin/debug/net6.0/publish/ App/:
+------
+Dockerfile:2
+--------------------
+   1 |     FROM mcr.microsoft.com/dotnet/aspnet:6.0
+   2 | >>> COPY bin/debug/net6.0/publish/ App/
+   3 |     WORKDIR /App
+   4 |     ENTRYPOINT ["dotnet", "WebAPI.dll"]
+--------------------
+ERROR: failed to solve: failed to compute cache key: failed to calculate checksum of ref moby::ruxcqlqs9i8kmjkoamtcsj0ib: failed to walk/var/lib/docker/tmp/buildkit-mount826050483/bin/debug/net6.0: lstat /var/lib/docker/tmp/buildkit-mount826050483/bin/debug/net6.0: no such file or directory
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ dotnet publish --no-build --configuration Debug --output /bin/debug/net6.0/publish/e
+Microsoft (R) Build Engine version 17.0.1+b177f8fa7 for .NET
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+/usr/lib/dotnet/sdk/6.0.116/Sdks/Microsoft.NET.Sdk/targets/Microsoft.NET.Publish.targets(120,5): error MSB3191: Unable to create directory "/bin/debug/net6.0/publish/e/". Access to the path '/bin/debug/net6.0/publish/e/' is denied. [/home/wsllinux/dotnetProjects/WebApi/src/WebApi/WebApi.csproj]
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ dotnet publish --no-build --configuration Debug --output /bin/debug/net6.0/publish/
+Microsoft (R) Build Engine version 17.0.1+b177f8fa7 for .NET
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+/usr/lib/dotnet/sdk/6.0.116/Sdks/Microsoft.NET.Sdk/targets/Microsoft.NET.Publish.targets(120,5): error MSB3191: Unable to create directory "/bin/debug/net6.0/publish/". Access to the path '/bin/debug/net6.0/publish/' is denied. [/home/wsllinux/dotnetProjects/WebApi/src/WebApi/WebApi.csproj]
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ dotnet publish --no-build --configuration Debug --output /bin/debug/net6.0/publish
+Microsoft (R) Build Engine version 17.0.1+b177f8fa7 for .NET
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+/usr/lib/dotnet/sdk/6.0.116/Sdks/Microsoft.NET.Sdk/targets/Microsoft.NET.Publish.targets(120,5): error MSB3191: Unable to create directory "/bin/debug/net6.0/publish/". Access to the path '/bin/debug/net6.0/publish/' is denied. [/home/wsllinux/dotnetProjects/WebApi/src/WebApi/WebApi.csproj]
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker build -t appcount/testwebapi:1 -f Dockerfile .
+[+] Building 1.4s (6/7)
+ => [internal] load .dockerignore                                                                                                  0.0s
+ => => transferring context: 2B                                                                                                    0.0s
+ => [internal] load build definition from Dockerfile                                                                               0.1s
+ => => transferring dockerfile: 155B                                                                                               0.0s
+ => [internal] load metadata for mcr.microsoft.com/dotnet/aspnet:6.0                                                               1.2s
+ => [internal] load build context                                                                                                  0.0s
+ => => transferring context: 2B                                                                                                    0.0s
+ => CANCELED [1/3] FROM mcr.microsoft.com/dotnet/aspnet:6.0@sha256:ae088fa9722a1e5f6e0a7c92244bbf527ee080745208950492f7df61f0b303  0.1s
+ => => resolve mcr.microsoft.com/dotnet/aspnet:6.0@sha256:ae088fa9722a1e5f6e0a7c92244bbf527ee080745208950492f7df61f0b30390         0.0s
+ => => sha256:d659aef489bb5d1983df27b84ea0f508c387d41c7ce12e809a75f2efdbb56c7f 3.26kB / 3.26kB                                     0.0s
+ => => sha256:ae088fa9722a1e5f6e0a7c92244bbf527ee080745208950492f7df61f0b30390 1.82kB / 1.82kB                                     0.0s
+ => => sha256:f0e09ce0171a19e1b28abcb7f177322bb93216a2b52b66a8076b590725314706 1.37kB / 1.37kB                                     0.0s
+ => ERROR [2/3] COPY bin/debug/net6.0/ App/                                                                                        0.0s
+------
+ > [2/3] COPY bin/debug/net6.0/ App/:
+------
+Dockerfile:2
+--------------------
+   1 |     FROM mcr.microsoft.com/dotnet/aspnet:6.0
+   2 | >>> COPY bin/debug/net6.0/ App/
+   3 |     WORKDIR /App
+   4 |     ENTRYPOINT ["dotnet", "WebAPI.dll"]
+--------------------
+ERROR: failed to solve: failed to compute cache key: failed to calculate checksum of ref moby::7e7tj5jwuin0l0guvpla0ccmy: failed to walk/var/lib/docker/tmp/buildkit-mount1667988511/bin/debug: lstat /var/lib/docker/tmp/buildkit-mount1667988511/bin/debug: no such file or directory
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ vi dockerfile
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker build -t appcount/testwebapi:1 -f Dockerfile .
+[+] Building 1.5s (6/7)
+ => [internal] load build definition from Dockerfile                                                                                0.0s
+ => => transferring dockerfile: 159B                                                                                                0.0s
+ => [internal] load .dockerignore                                                                                                   0.0s
+ => => transferring context: 2B                                                                                                     0.0s
+ => [internal] load metadata for mcr.microsoft.com/dotnet/aspnet:6.0                                                                1.3s
+ => [internal] load build context                                                                                                   0.0s
+ => => transferring context: 2B                                                                                                     0.0s
+ => CANCELED [1/3] FROM mcr.microsoft.com/dotnet/aspnet:6.0@sha256:ae088fa9722a1e5f6e0a7c92244bbf527ee080745208950492f7df61f0b3039  0.1s
+ => => resolve mcr.microsoft.com/dotnet/aspnet:6.0@sha256:ae088fa9722a1e5f6e0a7c92244bbf527ee080745208950492f7df61f0b30390          0.0s
+ => => sha256:d659aef489bb5d1983df27b84ea0f508c387d41c7ce12e809a75f2efdbb56c7f 3.26kB / 3.26kB                                      0.0s
+ => => sha256:ae088fa9722a1e5f6e0a7c92244bbf527ee080745208950492f7df61f0b30390 1.82kB / 1.82kB                                      0.0s
+ => => sha256:f0e09ce0171a19e1b28abcb7f177322bb93216a2b52b66a8076b590725314706 1.37kB / 1.37kB                                      0.0s
+ => ERROR [2/3] COPY src/bin/debug/net6.0/ App/                                                                                     0.0s
+------
+ > [2/3] COPY src/bin/debug/net6.0/ App/:
+------
+Dockerfile:2
+--------------------
+   1 |     FROM mcr.microsoft.com/dotnet/aspnet:6.0
+   2 | >>> COPY src/bin/debug/net6.0/ App/
+   3 |     WORKDIR /App
+   4 |     ENTRYPOINT ["dotnet", "WebAPI.dll"]
+--------------------
+ERROR: failed to solve: failed to compute cache key: failed to calculate checksum of ref moby::sl0l9l84arrezfrwdihotf6rt: failed to walk/var/lib/docker/tmp/buildkit-mount1984324379/src/bin/debug: lstat /var/lib/docker/tmp/buildkit-mount1984324379/src/bin/debug: no such file or directory
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ dotnet publish  --configuration Debug --output /bin/debug/net6.0/publish
+Microsoft (R) Build Engine version 17.0.1+b177f8fa7 for .NET
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  WebApi -> /home/wsllinux/dotnetProjects/WebApi/src/WebApi/bin/Debug/net6.0/WebApi.dll
+/usr/lib/dotnet/sdk/6.0.116/Sdks/Microsoft.NET.Sdk/targets/Microsoft.NET.Publish.targets(120,5): error MSB3191: Unable to create directory "/bin/debug/net6.0/publish/". Access to the path '/bin/debug/net6.0/publish/' is denied. [/home/wsllinux/dotnetProjects/WebApi/src/WebApi/WebApi.csproj]
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ dotnet publish  --configuration Debug
+Microsoft (R) Build Engine version 17.0.1+b177f8fa7 for .NET
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  WebApi -> /home/wsllinux/dotnetProjects/WebApi/src/WebApi/bin/Debug/net6.0/WebApi.dll
+  WebApi -> /home/wsllinux/dotnetProjects/WebApi/src/WebApi/bin/Debug/net6.0/publish/
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker build -t appcount/testwebapi:1 -f Dockerfile .
+[+] Building 1.6s (6/7)
+ => [internal] load build definition from Dockerfile                                                                                0.1s
+ => => transferring dockerfile: 169B                                                                                                0.0s
+ => [internal] load .dockerignore                                                                                                   0.1s
+ => => transferring context: 2B                                                                                                     0.0s
+ => [internal] load metadata for mcr.microsoft.com/dotnet/aspnet:6.0                                                                1.4s
+ => [internal] load build context                                                                                                   0.0s
+ => => transferring context: 2B                                                                                                     0.0s
+ => CANCELED [1/3] FROM mcr.microsoft.com/dotnet/aspnet:6.0@sha256:ae088fa9722a1e5f6e0a7c92244bbf527ee080745208950492f7df61f0b3039  0.1s
+ => => resolve mcr.microsoft.com/dotnet/aspnet:6.0@sha256:ae088fa9722a1e5f6e0a7c92244bbf527ee080745208950492f7df61f0b30390          0.0s
+ => => sha256:ae088fa9722a1e5f6e0a7c92244bbf527ee080745208950492f7df61f0b30390 1.82kB / 1.82kB                                      0.0s
+ => => sha256:f0e09ce0171a19e1b28abcb7f177322bb93216a2b52b66a8076b590725314706 1.37kB / 1.37kB                                      0.0s
+ => => sha256:d659aef489bb5d1983df27b84ea0f508c387d41c7ce12e809a75f2efdbb56c7f 3.26kB / 3.26kB                                      0.0s
+ => ERROR [2/3] COPY src/bin/debug/net6.0/publish/ App/                                                                             0.0s
+------
+ > [2/3] COPY src/bin/debug/net6.0/publish/ App/:
+------
+Dockerfile:2
+--------------------
+   1 |     FROM mcr.microsoft.com/dotnet/aspnet:6.0
+   2 | >>> COPY src/bin/debug/net6.0/publish/ App/
+   3 |     WORKDIR /App
+   4 |     ENTRYPOINT ["dotnet", "WebApi.dll"]
+--------------------
+ERROR: failed to solve: failed to compute cache key: failed to calculate checksum of ref moby::pij7or0j6if78q00q98w8v3ux: failed to walk/var/lib/docker/tmp/buildkit-mount1037477216/src/bin/debug/net6.0: lstat /var/lib/docker/tmp/buildkit-mount1037477216/src/bin/debug/net6.0: no such file or directory
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker build -t appcount/testwebapi:1 -f Dockerfile .
+[+] Building 197.7s (13/13) FINISHED
+ => [internal] load build definition from Dockerfile                                                                                0.0s
+ => => transferring dockerfile: 436B                                                                                                0.0s
+ => [internal] load .dockerignore                                                                                                   0.0s
+ => => transferring context: 2B                                                                                                     0.0s
+ => [internal] load metadata for mcr.microsoft.com/dotnet/aspnet:6.0                                                                1.3s
+ => [internal] load metadata for mcr.microsoft.com/dotnet/sdk:6.0                                                                   1.3s
+ => [build-env 1/4] FROM mcr.microsoft.com/dotnet/sdk:6.0@sha256:f6f276c7fb4cd310d784f9568bd09f7a336539bcbb48dcf63ed52dd1240bc18  177.3s
+ => => resolve mcr.microsoft.com/dotnet/sdk:6.0@sha256:f6f276c7fb4cd310d784f9568bd09f7a336539bcbb48dcf63ed52dd1240bc18e             0.1s
+ => => sha256:13cfa02ffefbadbecefbf43ba2514f7ea776d00cd3258414e595d82bef607ff5 2.01kB / 2.01kB                                      0.0s
+ => => sha256:f6f276c7fb4cd310d784f9568bd09f7a336539bcbb48dcf63ed52dd1240bc18e 1.82kB / 1.82kB                                      0.0s
+ => => sha256:7543eece699ee04e88f5140f1d1a1c5ff62573f9236de538f8beca6af629489f 7.17kB / 7.17kB                                      0.0s
+ => => sha256:9e3ea8720c6de96cc9ad544dddc695a3ab73f5581c5d954e0504cc4f80fb5e5c 31.40MB / 31.40MB                                   35.6s
+ => => sha256:2436f232d04089283ab348e14d6430f339b3b2652272096252202ea0c337aac4 15.17MB / 15.17MB                                   33.4s
+ => => sha256:c12fd5cada2cee63bdb12530e653c50af66531f211c68af677ed60dbd8eb2b9b 31.63MB / 31.63MB                                   55.9s
+ => => sha256:a13870fe3303be29f5d281e95c5804efd17582a3082f1128a5f4a2e2215df6ea 156B / 156B                                         33.9s
+ => => sha256:2c8900f692ad760d73a4d885da5731f2e6bd913b8db4b4075cb859f0000d87c3 9.46MB / 9.46MB                                     54.2s
+ => => sha256:a1f3127d3b56cf181a8c493aa0d8c668a2f5b5d1244f99ce9fc2a69c18ea6c8f 25.37MB / 25.37MB                                   64.6s
+ => => extracting sha256:9e3ea8720c6de96cc9ad544dddc695a3ab73f5581c5d954e0504cc4f80fb5e5c                                           5.6s
+ => => extracting sha256:2436f232d04089283ab348e14d6430f339b3b2652272096252202ea0c337aac4                                           1.4s
+ => => sha256:1f82b80d6396caf41ef9d82099ba7e94d36aca74b341ec955d8fc3cc712f3db5 148.55MB / 148.55MB                                157.5s
+ => => sha256:8e1ab441189d687a1779f02005936ad3a8c8e3ac540e20ac956425a3c0de5aa6 13.61MB / 13.61MB                                   77.5s
+ => => extracting sha256:c12fd5cada2cee63bdb12530e653c50af66531f211c68af677ed60dbd8eb2b9b                                           4.4s
+ => => extracting sha256:a13870fe3303be29f5d281e95c5804efd17582a3082f1128a5f4a2e2215df6ea                                           0.0s
+ => => extracting sha256:2c8900f692ad760d73a4d885da5731f2e6bd913b8db4b4075cb859f0000d87c3                                           3.0s
+ => => extracting sha256:a1f3127d3b56cf181a8c493aa0d8c668a2f5b5d1244f99ce9fc2a69c18ea6c8f                                           1.3s
+ => => extracting sha256:1f82b80d6396caf41ef9d82099ba7e94d36aca74b341ec955d8fc3cc712f3db5                                          13.6s
+ => => extracting sha256:8e1ab441189d687a1779f02005936ad3a8c8e3ac540e20ac956425a3c0de5aa6                                           2.3s
+ => [internal] load build context                                                                                                   0.2s
+ => => transferring context: 8.52MB                                                                                                 0.1s
+ => [stage-1 1/3] FROM mcr.microsoft.com/dotnet/aspnet:6.0@sha256:ae088fa9722a1e5f6e0a7c92244bbf527ee080745208950492f7df61f0b3039  64.4s
+ => => resolve mcr.microsoft.com/dotnet/aspnet:6.0@sha256:ae088fa9722a1e5f6e0a7c92244bbf527ee080745208950492f7df61f0b30390          0.1s
+ => => sha256:f0e09ce0171a19e1b28abcb7f177322bb93216a2b52b66a8076b590725314706 1.37kB / 1.37kB                                      0.0s
+ => => sha256:d659aef489bb5d1983df27b84ea0f508c387d41c7ce12e809a75f2efdbb56c7f 3.26kB / 3.26kB                                      0.0s
+ => => sha256:9e3ea8720c6de96cc9ad544dddc695a3ab73f5581c5d954e0504cc4f80fb5e5c 31.40MB / 31.40MB                                   35.5s
+ => => sha256:2436f232d04089283ab348e14d6430f339b3b2652272096252202ea0c337aac4 15.17MB / 15.17MB                                   33.3s
+ => => sha256:c12fd5cada2cee63bdb12530e653c50af66531f211c68af677ed60dbd8eb2b9b 31.63MB / 31.63MB                                   55.9s
+ => => sha256:ae088fa9722a1e5f6e0a7c92244bbf527ee080745208950492f7df61f0b30390 1.82kB / 1.82kB                                      0.0s
+ => => sha256:a13870fe3303be29f5d281e95c5804efd17582a3082f1128a5f4a2e2215df6ea 156B / 156B                                         33.9s
+ => => sha256:2c8900f692ad760d73a4d885da5731f2e6bd913b8db4b4075cb859f0000d87c3 9.46MB / 9.46MB                                     54.2s
+ => => extracting sha256:9e3ea8720c6de96cc9ad544dddc695a3ab73f5581c5d954e0504cc4f80fb5e5c                                           5.6s
+ => => extracting sha256:2436f232d04089283ab348e14d6430f339b3b2652272096252202ea0c337aac4                                           1.4s
+ => => extracting sha256:c12fd5cada2cee63bdb12530e653c50af66531f211c68af677ed60dbd8eb2b9b                                         139.9s
+ => => extracting sha256:2c8900f692ad760d73a4d885da5731f2e6bd913b8db4b4075cb859f0000d87c3                                         135.1s
+ => [stage-1 2/3] WORKDIR /App                                                                                                      0.3s
+ => [build-env 2/4] WORKDIR /App                                                                                                    3.7s
+ => [build-env 3/4] COPY . ./                                                                                                       0.4s
+ => [build-env 4/4] RUN dotnet publish -c Release -o out                                                                           14.5s
+ => [stage-1 3/3] COPY --from=build-env /App/out .                                                                                  0.2s
+ => exporting to image                                                                                                              0.1s
+ => => exporting layers                                                                                                             0.1s
+ => => writing image sha256:f3b58565433da09e73446863c14c8dc54c20299fb22a31cc63b76b66c5bf1420                                        0.0s
+ => => naming to docker.io/appcount/testwebapi:1                                                                                    0.0s
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker images
+REPOSITORY            TAG       IMAGE ID       CREATED         SIZE
+appcount/testwebapi   1         f3b58565433d   7 seconds ago   213MB
+node                  latest    acd15857ce39   40 hours ago    1GB
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker build -t appcount/testwebapi1:1 -f Dockerfile .
+[+] Building 1.0s (6/6) FINISHED
+ => [internal] load build definition from Dockerfile                                                                                0.1s
+ => => transferring dockerfile: 437B                                                                                                0.0s
+ => [internal] load .dockerignore                                                                                                   0.2s
+ => => transferring context: 2B                                                                                                     0.0s
+ => [internal] load metadata for mcr.microsoft.com/dotnet/aspnet:6.0                                                                0.7s
+ => [stage-1 1/2] FROM mcr.microsoft.com/dotnet/aspnet:6.0@sha256:ae088fa9722a1e5f6e0a7c92244bbf527ee080745208950492f7df61f0b30390  0.0s
+ => CACHED [stage-1 2/2] WORKDIR /App                                                                                               0.0s
+ => exporting to image                                                                                                              0.1s
+ => => exporting layers                                                                                                             0.0s
+ => => writing image sha256:6a5b299fc83fc0f863187e4ff22aa3425467faa4699d15d4ae9154244dcfbe10                                        0.0s
+ => => naming to docker.io/appcount/testwebapi1:1                                                                                   0.0s
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker images
+REPOSITORY             TAG       IMAGE ID       CREATED              SIZE
+appcount/testwebapi    1         f3b58565433d   About a minute ago   213MB
+appcount/testwebapi1   1         6a5b299fc83f   3 minutes ago        209MB
+node                   latest    acd15857ce39   40 hours ago         1GB
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker images
+REPOSITORY             TAG       IMAGE ID       CREATED              SIZE
+appcount/testwebapi    1         f3b58565433d   About a minute ago   213MB
+appcount/testwebapi1   1         6a5b299fc83f   3 minutes ago        209MB
+node                   latest    acd15857ce39   40 hours ago         1GB
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ #Create container using image
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker run --name testapiapp appcount/testwebapi -p 80:8000
+Unable to find image 'appcount/testwebapi:latest' locally
+docker: Error response from daemon: manifest for appcount/testwebapi:latest not found: manifest unknown: manifest unknown.
+See 'docker run --help'.
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker run --name testapiapp appcount/testwebapi:1 -p 80:8000
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://[::]:80
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /App/
+^Cinfo: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker ps -a
+CONTAINER ID   IMAGE                   COMMAND                  CREATED         STATUS                     PORTS     NAMES
+88be52e1a3e8   appcount/testwebapi:1   "dotnet WebApi.dll -…"   2 minutes ago   Exited (0) 5 seconds ago             testapiapp
+55ce8932220c   node                    "docker-entrypoint.s…"   18 hours ago    Exited (0) 18 hours ago              dreamy_germain
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ dotnet run .
+Couldn't find a project to run. Ensure a project exists in /home/wsllinux/dotnetProjects/WebApi, or pass the path to the project using --project.
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ dotnet run
+Couldn't find a project to run. Ensure a project exists in /home/wsllinux/dotnetProjects/WebApi, or pass the path to the project using --project.
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ cd src
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi/src$ dotnet run
+Couldn't find a project to run. Ensure a project exists in /home/wsllinux/dotnetProjects/WebApi/src, or pass the path to the project using --project.
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi/src$ dotnet run --project src/WebApi/WebApi.csproj
+MSBUILD : error MSB1009: Project file does not exist.
+Switch: src/WebApi/WebApi.csproj
+
+The build failed. Fix the build errors and run again.
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi/src$ cd ..
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ dotnet run --project src/WebApi/WebApi.csproj
+Building...
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: https://localhost:7298
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://localhost:5111
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /home/wsllinux/dotnetProjects/WebApi/src/WebApi/
+^Cinfo: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker run --name testapiapp1 appcount/testwebapi:1 -p 80:5111
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://[::]:80
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /App/
+^Cinfo: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$

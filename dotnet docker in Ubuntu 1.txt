@@ -1,0 +1,1191 @@
+<3>WSL (374) ERROR: CreateProcessEntryCommon:357: getpwnam(myusername) failed 0
+wsllinux@HomeTechPAD:~$ ls
+dotnetProjects  test.txt
+wsllinux@HomeTechPAD:~$ cd dotnetProjects/
+wsllinux@HomeTechPAD:~/dotnetProjects$ ls
+WebApi
+wsllinux@HomeTechPAD:~/dotnetProjects$ cd webapi
+-bash: cd: webapi: No such file or directory
+wsllinux@HomeTechPAD:~/dotnetProjects$ cd webapi/
+-bash: cd: webapi/: No such file or directory
+wsllinux@HomeTechPAD:~/dotnetProjects$ cd WebApi/
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ ls
+Dockerfile  WebApi.sln  src
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ code .
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ cd src/
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi/src$ dotnet run
+Couldn't find a project to run. Ensure a project exists in /home/wsllinux/dotnetProjects/WebApi/src, or pass the path to the project using --project.
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi/src$ ls
+WebApi
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi/src$ cd WebApi
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi/src/WebApi$ ls
+Controllers  Program.cs  Properties  WeatherForecast.cs  WebApi.csproj  appsettings.Development.json  appsettings.json  bin  obj
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi/src/WebApi$ dotnet run
+Building...
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: https://localhost:7298
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://localhost:5111
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /home/wsllinux/dotnetProjects/WebApi/src/WebApi/
+^Cinfo: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi/src/WebApi$ docker ps -a
+
+The command 'docker' could not be found in this WSL 2 distro.
+We recommend to activate the WSL integration in Docker Desktop settings.
+
+For details about using Docker Desktop with WSL 2, visit:
+
+https://docs.docker.com/go/wsl2/
+
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi/src/WebApi$ cd ..
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi/src$ cd ..
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker images
+REPOSITORY             TAG       IMAGE ID       CREATED        SIZE
+appcount/testwebapi    1         f3b58565433d   3 hours ago    213MB
+appcount/testwebapi1   1         6a5b299fc83f   3 hours ago    209MB
+node                   latest    acd15857ce39   43 hours ago   1GB
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker ps -a
+CONTAINER ID   IMAGE                   COMMAND                  CREATED        STATUS                        PORTS     NAMES
+69cf307f977d   appcount/testwebapi:1   "dotnet WebApi.dll -…"   2 hours ago    Exited (255) 54 seconds ago             testapiapp3
+30b9048aa289   appcount/testwebapi:1   "dotnet WebApi.dll -…"   2 hours ago    Exited (0) 2 hours ago                  testapiapp2
+6910b2ad8251   appcount/testwebapi:1   "dotnet WebApi.dll -…"   3 hours ago    Exited (130) 3 hours ago                testapiapp1
+88be52e1a3e8   appcount/testwebapi:1   "dotnet WebApi.dll -…"   3 hours ago    Exited (255) 54 seconds ago             testapiapp
+55ce8932220c   node                    "docker-entrypoint.s…"   21 hours ago   Exited (0) 21 hours ago                 dreamy_germain
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker rm 69cf307f97
+69cf307f97
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker rm 30b9048aa289
+30b9048aa289
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker rm 88be52e1a3e8
+88be52e1a3e8
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker ps -a
+CONTAINER ID   IMAGE                   COMMAND                  CREATED        STATUS                     PORTS     NAMES
+6910b2ad8251   appcount/testwebapi:1   "dotnet WebApi.dll -…"   3 hours ago    Exited (130) 3 hours ago             testapiapp1
+55ce8932220c   node                    "docker-entrypoint.s…"   21 hours ago   Exited (0) 21 hours ago              dreamy_germain
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker rm 6910b2ad8251
+6910b2ad8251
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker images
+REPOSITORY             TAG       IMAGE ID       CREATED        SIZE
+appcount/testwebapi    1         f3b58565433d   3 hours ago    213MB
+appcount/testwebapi1   1         6a5b299fc83f   3 hours ago    209MB
+node                   latest    acd15857ce39   43 hours ago   1GB
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker rmi appcount/testwebapi:1
+Untagged: appcount/testwebapi:1
+Deleted: sha256:f3b58565433da09e73446863c14c8dc54c20299fb22a31cc63b76b66c5bf1420
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker rmi appcount/testwebapi1:1
+Untagged: appcount/testwebapi1:1
+Deleted: sha256:6a5b299fc83fc0f863187e4ff22aa3425467faa4699d15d4ae9154244dcfbe10
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker images
+REPOSITORY   TAG       IMAGE ID       CREATED        SIZE
+node         latest    acd15857ce39   43 hours ago   1GB
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker build -t appcount/webapitestimage:1 -f dockerfile .
+[+] Building 0.1s (2/2) FINISHED
+ => [internal] load build definition from dockerfile                                                                               0.0s
+ => => transferring dockerfile: 2B                                                                                                 0.0s
+ => [internal] load .dockerignore                                                                                                  0.0s
+ => => transferring context: 2B                                                                                                    0.0s
+ERROR: failed to solve: failed to read dockerfile: open /var/lib/docker/tmp/buildkit-mount1114269016/dockerfile: no such file or directory
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker build -t appcount/webapitestimage:1 -f Dockerfile .
+[+] Building 0.6s (6/6) FINISHED
+ => [internal] load .dockerignore                                                                                                   0.1s
+ => => transferring context: 2B                                                                                                     0.0s
+ => [internal] load build definition from Dockerfile                                                                                0.0s
+ => => transferring dockerfile: 442B                                                                                                0.0s
+ => [internal] load metadata for mcr.microsoft.com/dotnet/aspnet:6.0                                                                0.6s
+ => [stage-1 1/2] FROM mcr.microsoft.com/dotnet/aspnet:6.0@sha256:ae088fa9722a1e5f6e0a7c92244bbf527ee080745208950492f7df61f0b30390  0.0s
+ => CACHED [stage-1 2/2] WORKDIR /App                                                                                               0.0s
+ => exporting to image                                                                                                              0.0s
+ => => exporting layers                                                                                                             0.0s
+ => => writing image sha256:6a5b299fc83fc0f863187e4ff22aa3425467faa4699d15d4ae9154244dcfbe10                                        0.0s
+ => => naming to docker.io/appcount/webapitestimage:1                                                                               0.0s
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker images
+REPOSITORY                 TAG       IMAGE ID       CREATED        SIZE
+appcount/webapitestimage   1         6a5b299fc83f   3 hours ago    209MB
+node                       latest    acd15857ce39   43 hours ago   1GB
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker run --name webapicontainer appcount/webapitestimage:1 -p 88:7298
+The command could not be loaded, possibly because:
+  * You intended to execute a .NET application:
+      The application 'WebApi.dll' does not exist.
+  * You intended to execute a .NET SDK command:
+      No .NET SDKs were found.
+
+Download a .NET SDK:
+https://aka.ms/dotnet-download
+
+Learn about SDK resolution:
+https://aka.ms/dotnet/sdk-not-found
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker ps -a
+CONTAINER ID   IMAGE                        COMMAND                  CREATED          STATUS                        PORTS     NAMES
+4d6ca368b438   appcount/webapitestimage:1   "dotnet WebApi.dll -…"   27 seconds ago   Exited (145) 26 seconds ago             webapicontainer
+55ce8932220c   node                         "docker-entrypoint.s…"   21 hours ago     Exited (0) 21 hours ago                 dreamy_germain
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker exec  appcount/webapitestimage:1
+"docker exec" requires at least 2 arguments.
+See 'docker exec --help'.
+
+Usage:  docker exec [OPTIONS] CONTAINER COMMAND [ARG...]
+
+Execute a command in a running container
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker start attach  appcount/webapitestimage:1
+Error response from daemon: No such container: attach
+Error response from daemon: No such container: appcount/webapitestimage:1
+Error: failed to start containers: attach, appcount/webapitestimage:1
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker start appcount/webapitestimage:1
+Error response from daemon: No such container: appcount/webapitestimage:1
+Error: failed to start containers: appcount/webapitestimage:1
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker start 4d6ca368b438
+4d6ca368b438
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker ps -a
+CONTAINER ID   IMAGE                        COMMAND                  CREATED              STATUS                       PORTS     NAMES
+4d6ca368b438   appcount/webapitestimage:1   "dotnet WebApi.dll -…"   About a minute ago   Exited (145) 4 seconds ago             webapicontainer
+55ce8932220c   node                         "docker-entrypoint.s…"   21 hours ago         Exited (0) 21 hours ago                dreamy_germain
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker exec 4d6ca368b438
+"docker exec" requires at least 2 arguments.
+See 'docker exec --help'.
+
+Usage:  docker exec [OPTIONS] CONTAINER COMMAND [ARG...]
+
+Execute a command in a running container
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker exec -it 4d6ca368b438
+"docker exec" requires at least 2 arguments.
+See 'docker exec --help'.
+
+Usage:  docker exec [OPTIONS] CONTAINER COMMAND [ARG...]
+
+Execute a command in a running container
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker exec -it 4d6ca368b438 sh
+Error response from daemon: Container 4d6ca368b438c131c69abb6800a0bf1ca435f9cf2c2a15dcd3c1226f5f3a7e48 is not running
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker rm 4d6ca368b
+4d6ca368b
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker images
+REPOSITORY                 TAG       IMAGE ID       CREATED        SIZE
+appcount/webapitestimage   1         6a5b299fc83f   3 hours ago    209MB
+node                       latest    acd15857ce39   43 hours ago   1GB
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker rmi appcount/webapitestimage:1
+Untagged: appcount/webapitestimage:1
+Deleted: sha256:6a5b299fc83fc0f863187e4ff22aa3425467faa4699d15d4ae9154244dcfbe10
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker build -t appcount/webapitestimage:1 -f Dockerfile .
+[+] Building 0.6s (5/5) FINISHED
+ => [internal] load build definition from Dockerfile                                                                                0.0s
+ => => transferring dockerfile: 443B                                                                                                0.0s
+ => [internal] load .dockerignore                                                                                                   0.1s
+ => => transferring context: 2B                                                                                                     0.0s
+ => [internal] load metadata for mcr.microsoft.com/dotnet/aspnet:6.0                                                                0.5s
+ => CACHED [stage-1 1/1] FROM mcr.microsoft.com/dotnet/aspnet:6.0@sha256:ae088fa9722a1e5f6e0a7c92244bbf527ee080745208950492f7df61f  0.0s
+ => exporting to image                                                                                                              0.0s
+ => => exporting layers                                                                                                             0.0s
+ => => writing image sha256:cece0e54c4e60ea0c5f5df05598d8fcd4503008a0cb5ed4040d8436af3a1b34b                                        0.0s
+ => => naming to docker.io/appcount/webapitestimage:1                                                                               0.0s
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker build -t appcount/webapitestimage1:1 -f Dockerfile .
+[+] Building 1.0s (5/5) FINISHED
+ => [internal] load build definition from Dockerfile                                                                                0.7s
+ => => transferring dockerfile: 443B                                                                                                0.0s
+ => [internal] load .dockerignore                                                                                                   0.5s
+ => => transferring context: 2B                                                                                                     0.0s
+ => [internal] load metadata for mcr.microsoft.com/dotnet/aspnet:6.0                                                                0.2s
+ => CACHED [stage-1 1/1] FROM mcr.microsoft.com/dotnet/aspnet:6.0@sha256:ae088fa9722a1e5f6e0a7c92244bbf527ee080745208950492f7df61f  0.0s
+ => exporting to image                                                                                                              0.0s
+ => => exporting layers                                                                                                             0.0s
+ => => writing image sha256:cece0e54c4e60ea0c5f5df05598d8fcd4503008a0cb5ed4040d8436af3a1b34b                                        0.0s
+ => => naming to docker.io/appcount/webapitestimage1:1                                                                              0.0s
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker rmi appcount/webapitestimage1:1
+Untagged: appcount/webapitestimage1:1
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker images
+REPOSITORY                 TAG       IMAGE ID       CREATED        SIZE
+node                       latest    acd15857ce39   43 hours ago   1GB
+appcount/webapitestimage   1         cece0e54c4e6   3 days ago     209MB
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker run --name webapicontainer appcount/webapitestimage:1 -p 80:7298
+The command could not be loaded, possibly because:
+  * You intended to execute a .NET application:
+      The application 'WebApi.dll' does not exist.
+  * You intended to execute a .NET SDK command:
+      No .NET SDKs were found.
+
+Download a .NET SDK:
+https://aka.ms/dotnet-download
+
+Learn about SDK resolution:
+https://aka.ms/dotnet/sdk-not-found
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker build -t appcount/webapitestimage1:1 -f Dockerfile .
+[+] Building 63.4s (13/13) FINISHED
+ => [internal] load build definition from Dockerfile                                                                                0.1s
+ => => transferring dockerfile: 441B                                                                                                0.0s
+ => [internal] load .dockerignore                                                                                                   0.1s
+ => => transferring context: 2B                                                                                                     0.0s
+ => [internal] load metadata for mcr.microsoft.com/dotnet/aspnet:6.0                                                                4.9s
+ => [internal] load metadata for mcr.microsoft.com/dotnet/sdk:6.0                                                                   5.0s
+ => [build-env 1/4] FROM mcr.microsoft.com/dotnet/sdk:6.0@sha256:f6f276c7fb4cd310d784f9568bd09f7a336539bcbb48dcf63ed52dd1240bc18e   0.0s
+ => [stage-1 1/3] FROM mcr.microsoft.com/dotnet/aspnet:6.0@sha256:ae088fa9722a1e5f6e0a7c92244bbf527ee080745208950492f7df61f0b30390  0.0s
+ => [internal] load build context                                                                                                   0.0s
+ => => transferring context: 5.12kB                                                                                                 0.0s
+ => CACHED [build-env 2/4] WORKDIR /App                                                                                             0.0s
+ => [build-env 3/4] COPY . ./                                                                                                       0.2s
+ => [build-env 4/4] RUN dotnet publish -c Release -o out                                                                           57.9s
+ => CACHED [stage-1 2/3] WORKDIR /App                                                                                               0.0s
+ => CACHED [stage-1 3/3] COPY --from=build-env /App/out .                                                                           0.0s
+ => exporting to image                                                                                                              0.0s
+ => => exporting layers                                                                                                             0.0s
+ => => writing image sha256:f3b58565433da09e73446863c14c8dc54c20299fb22a31cc63b76b66c5bf1420                                        0.0s
+ => => naming to docker.io/appcount/webapitestimage1:1                                                                              0.0s
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ cat Dockerfile
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
+WORKDIR /App
+
+# Copy everything
+#COPY src/WebApi/bin/debug/net6.0/publish/ ./
+COPY . ./
+# Restore as distinct layers
+#RUN dotnet restore
+# Build and publish a release
+RUN dotnet publish -c Release -o out
+
+# Build runtime image
+FROM mcr.microsoft.com/dotnet/aspnet:6.0
+WORKDIR /App
+COPY --from=build-env /App/out .
+ENTRYPOINT ["dotnet", "WebApi.dll"]
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker run --name webapicontainer appcount/webapitestimage1:1 -p 80:7298
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://[::]:80
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /App/
+^Cinfo: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker inspect 24ed8c8db
+[
+    {
+        "Id": "24ed8c8db49508adad47cec179f13c143eaa6a65a00c3acf56a6ccae5f3aed3f",
+        "Created": "2023-05-06T14:45:08.258107061Z",
+        "Path": "dotnet",
+        "Args": [
+            "WebApi.dll",
+            "-p",
+            "850:7298"
+        ],
+        "State": {
+            "Status": "running",
+            "Running": true,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 5493,
+            "ExitCode": 0,
+            "Error": "",
+            "StartedAt": "2023-05-06T14:45:08.738605626Z",
+            "FinishedAt": "0001-01-01T00:00:00Z"
+        },
+        "Image": "sha256:f3b58565433da09e73446863c14c8dc54c20299fb22a31cc63b76b66c5bf1420",
+        "ResolvConfPath": "/var/lib/docker/containers/24ed8c8db49508adad47cec179f13c143eaa6a65a00c3acf56a6ccae5f3aed3f/resolv.conf",
+        "HostnamePath": "/var/lib/docker/containers/24ed8c8db49508adad47cec179f13c143eaa6a65a00c3acf56a6ccae5f3aed3f/hostname",
+        "HostsPath": "/var/lib/docker/containers/24ed8c8db49508adad47cec179f13c143eaa6a65a00c3acf56a6ccae5f3aed3f/hosts",
+        "LogPath": "/var/lib/docker/containers/24ed8c8db49508adad47cec179f13c143eaa6a65a00c3acf56a6ccae5f3aed3f/24ed8c8db49508adad47cec179f13c143eaa6a65a00c3acf56a6ccae5f3aed3f-json.log",
+        "Name": "/webapicontainer1",
+        "RestartCount": 0,
+        "Driver": "overlay2",
+        "Platform": "linux",
+        "MountLabel": "",
+        "ProcessLabel": "",
+        "AppArmorProfile": "",
+        "ExecIDs": null,
+        "HostConfig": {
+            "Binds": null,
+            "ContainerIDFile": "",
+            "LogConfig": {
+                "Type": "json-file",
+                "Config": {}
+            },
+            "NetworkMode": "default",
+            "PortBindings": {},
+            "RestartPolicy": {
+                "Name": "no",
+                "MaximumRetryCount": 0
+            },
+            "AutoRemove": false,
+            "VolumeDriver": "",
+            "VolumesFrom": null,
+            "ConsoleSize": [
+                37,
+                137
+            ],
+            "CapAdd": null,
+            "CapDrop": null,
+            "CgroupnsMode": "host",
+            "Dns": [],
+            "DnsOptions": [],
+            "DnsSearch": [],
+            "ExtraHosts": null,
+            "GroupAdd": null,
+            "IpcMode": "private",
+            "Cgroup": "",
+            "Links": null,
+            "OomScoreAdj": 0,
+            "PidMode": "",
+            "Privileged": false,
+            "PublishAllPorts": false,
+            "ReadonlyRootfs": false,
+            "SecurityOpt": null,
+            "UTSMode": "",
+            "UsernsMode": "",
+            "ShmSize": 67108864,
+            "Runtime": "runc",
+            "Isolation": "",
+            "CpuShares": 0,
+            "Memory": 0,
+            "NanoCpus": 0,
+            "CgroupParent": "",
+            "BlkioWeight": 0,
+            "BlkioWeightDevice": [],
+            "BlkioDeviceReadBps": [],
+            "BlkioDeviceWriteBps": [],
+            "BlkioDeviceReadIOps": [],
+            "BlkioDeviceWriteIOps": [],
+            "CpuPeriod": 0,
+            "CpuQuota": 0,
+            "CpuRealtimePeriod": 0,
+            "CpuRealtimeRuntime": 0,
+            "CpusetCpus": "",
+            "CpusetMems": "",
+            "Devices": [],
+            "DeviceCgroupRules": null,
+            "DeviceRequests": null,
+            "MemoryReservation": 0,
+            "MemorySwap": 0,
+            "MemorySwappiness": null,
+            "OomKillDisable": false,
+            "PidsLimit": null,
+            "Ulimits": null,
+            "CpuCount": 0,
+            "CpuPercent": 0,
+            "IOMaximumIOps": 0,
+            "IOMaximumBandwidth": 0,
+            "MaskedPaths": [
+                "/proc/asound",
+                "/proc/acpi",
+                "/proc/kcore",
+                "/proc/keys",
+                "/proc/latency_stats",
+                "/proc/timer_list",
+                "/proc/timer_stats",
+                "/proc/sched_debug",
+                "/proc/scsi",
+                "/sys/firmware"
+            ],
+            "ReadonlyPaths": [
+                "/proc/bus",
+                "/proc/fs",
+                "/proc/irq",
+                "/proc/sys",
+                "/proc/sysrq-trigger"
+            ]
+        },
+        "GraphDriver": {
+            "Data": {
+                "LowerDir": "/var/lib/docker/overlay2/5b10eb20a0a29d71d71c983bd97fcdddfbddf98b321b32571555649d824e99d9-init/diff:/var/lib/docker/overlay2/ll9lbl4j4gpdfd3pyzcx53dm0/diff:/var/lib/docker/overlay2/s706rnte9kg7c8u4ic02e4wds/diff:/var/lib/docker/overlay2/59d88fe4798fce0c0df189cd47c1147aa1e4a911bcf40fbf5cc9bbb7df29edfb/diff:/var/lib/docker/overlay2/ee39679cbf4574814ec922453b8cd8861affd1210f9056d840211c6ea4400fef/diff:/var/lib/docker/overlay2/ed43753a771db91c0a8b2a1661e45f05297a877a6255b15af1f25fbab96d7735/diff:/var/lib/docker/overlay2/85bc8ae6494460dc4340ce8e7d7482f4426e608cdd88e2c414754b93a2bbf5cc/diff:/var/lib/docker/overlay2/ccc7741d78b6ebd31ceaf908d5a581aaa437b09155079166cd6055e7fd857c71/diff",
+                "MergedDir": "/var/lib/docker/overlay2/5b10eb20a0a29d71d71c983bd97fcdddfbddf98b321b32571555649d824e99d9/merged",
+                "UpperDir": "/var/lib/docker/overlay2/5b10eb20a0a29d71d71c983bd97fcdddfbddf98b321b32571555649d824e99d9/diff",
+                "WorkDir": "/var/lib/docker/overlay2/5b10eb20a0a29d71d71c983bd97fcdddfbddf98b321b32571555649d824e99d9/work"
+            },
+            "Name": "overlay2"
+        },
+        "Mounts": [],
+        "Config": {
+            "Hostname": "24ed8c8db495",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "Tty": true,
+            "OpenStdin": true,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "ASPNETCORE_URLS=http://+:80",
+                "DOTNET_RUNNING_IN_CONTAINER=true",
+                "DOTNET_VERSION=6.0.16",
+                "ASPNET_VERSION=6.0.16"
+            ],
+            "Cmd": [
+                "-p",
+                "850:7298"
+            ],
+            "Image": "appcount/webapitestimage1:1",
+            "Volumes": null,
+            "WorkingDir": "/App",
+            "Entrypoint": [
+                "dotnet",
+                "WebApi.dll"
+            ],
+            "OnBuild": null,
+            "Labels": {
+                "desktop.docker.io/wsl-distro": "Ubuntu-22.04"
+            }
+        },
+        "NetworkSettings": {
+            "Bridge": "",
+            "SandboxID": "c9acf2859b51268cf545807d210ad0e23ed6809e0ef9ceec104c49c830037235",
+            "HairpinMode": false,
+            "LinkLocalIPv6Address": "",
+            "LinkLocalIPv6PrefixLen": 0,
+            "Ports": {},
+            "SandboxKey": "/var/run/docker/netns/c9acf2859b51",
+            "SecondaryIPAddresses": null,
+            "SecondaryIPv6Addresses": null,
+            "EndpointID": "63c45b5065204426fa1b6701543a24f8b9c20658a857e31e532b914adfef35b0",
+            "Gateway": "172.17.0.1",
+            "GlobalIPv6Address": "",
+            "GlobalIPv6PrefixLen": 0,
+            "IPAddress": "172.17.0.2",
+            "IPPrefixLen": 16,
+            "IPv6Gateway": "",
+            "MacAddress": "02:42:ac:11:00:02",
+            "Networks": {
+                "bridge": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "NetworkID": "f2655442ac49ad7f0f0b7eaeab1fa0f37cf3321810c7025ecf207652bc5a713a",
+                    "EndpointID": "63c45b5065204426fa1b6701543a24f8b9c20658a857e31e532b914adfef35b0",
+                    "Gateway": "172.17.0.1",
+                    "IPAddress": "172.17.0.2",
+                    "IPPrefixLen": 16,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "MacAddress": "02:42:ac:11:00:02",
+                    "DriverOpts": null
+                }
+            }
+        }
+    }
+]
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker build -t appcount/webapiimage:1 -f Dockerfile .
+[+] Building 1.1s (9/13)
+ => [internal] load build definition from Dockerfile                                                                                0.0s
+ => => transferring dockerfile: 974B                                                                                                0.0s
+ => [internal] load .dockerignore                                                                                                   0.0s
+ => => transferring context: 2B                                                                                                     0.0s
+ => [internal] load metadata for mcr.microsoft.com/dotnet/aspnet:6.0                                                                0.4s
+ => [internal] load metadata for mcr.microsoft.com/dotnet/sdk:6.0                                                                   0.4s
+ => [build-env 1/5] FROM mcr.microsoft.com/dotnet/sdk:6.0@sha256:f6f276c7fb4cd310d784f9568bd09f7a336539bcbb48dcf63ed52dd1240bc18e   0.0s
+ => [internal] load build context                                                                                                   0.0s
+ => => transferring context: 5.61kB                                                                                                 0.0s
+ => [stage-1 1/3] FROM mcr.microsoft.com/dotnet/aspnet:6.0@sha256:ae088fa9722a1e5f6e0a7c92244bbf527ee080745208950492f7df61f0b30390  0.0s
+ => CACHED [build-env 2/5] WORKDIR /App                                                                                             0.0s
+ => ERROR [build-env 3/5] RUN dotnet restore                                                                                        0.6s
+------
+ > [build-env 3/5] RUN dotnet restore:
+#0 0.576 MSBUILD : error MSB1003: Specify a project or solution file. The current working directory does not contain a project or solution file.
+------
+Dockerfile:11
+--------------------
+   9 |     # Step 3: Run a restore to download dependencies
+  10 |     # Restore as distinct layers
+  11 | >>> RUN dotnet restore
+  12 |
+  13 |     # Step 4: Copy app code to the container
+--------------------
+ERROR: failed to solve: process "/bin/sh -c dotnet restore" did not complete successfully: exit code: 1
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker build -t appcount/webapiimage:1 -f Dockerfile .
+[+] Building 1.0s (9/13)
+ => [internal] load .dockerignore                                                                                                   0.0s
+ => => transferring context: 2B                                                                                                     0.0s
+ => [internal] load build definition from Dockerfile                                                                                0.0s
+ => => transferring dockerfile: 1.02kB                                                                                              0.0s
+ => [internal] load metadata for mcr.microsoft.com/dotnet/aspnet:6.0                                                                0.4s
+ => [internal] load metadata for mcr.microsoft.com/dotnet/sdk:6.0                                                                   0.3s
+ => [build-env 1/5] FROM mcr.microsoft.com/dotnet/sdk:6.0@sha256:f6f276c7fb4cd310d784f9568bd09f7a336539bcbb48dcf63ed52dd1240bc18e   0.0s
+ => [internal] load build context                                                                                                   0.0s
+ => => transferring context: 5.66kB                                                                                                 0.0s
+ => CACHED [build-env 2/5] WORKDIR /App                                                                                             0.0s
+ => [stage-1 1/3] FROM mcr.microsoft.com/dotnet/aspnet:6.0@sha256:ae088fa9722a1e5f6e0a7c92244bbf527ee080745208950492f7df61f0b30390  0.0s
+ => ERROR [build-env 3/5] RUN dotnet restore "src/WebApi/WebApi.csproj"                                                             0.6s
+------
+ > [build-env 3/5] RUN dotnet restore "src/WebApi/WebApi.csproj":
+#0 0.520 MSBUILD : error MSB1009: Project file does not exist.
+#0 0.520 Switch: src/WebApi/WebApi.csproj
+------
+Dockerfile:12
+--------------------
+  10 |     # Restore as distinct layers
+  11 |     #RUN dotnet restore
+  12 | >>> RUN dotnet restore "src/WebApi/WebApi.csproj"
+  13 |
+  14 |     # Step 4: Copy app code to the container
+--------------------
+ERROR: failed to solve: process "/bin/sh -c dotnet restore \"src/WebApi/WebApi.csproj\"" did not complete successfully: exit code: 1
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker build -t appcount/webapiimage:1 -f Dockerfile .
+[+] Building 12.2s (13/16)
+ => [internal] load build definition from Dockerfile                                                                                0.0s
+ => => transferring dockerfile: 1.02kB                                                                                              0.0s
+ => [internal] load .dockerignore                                                                                                   0.0s
+ => => transferring context: 2B                                                                                                     0.0s
+ => [internal] load metadata for mcr.microsoft.com/dotnet/aspnet:6.0                                                                0.4s
+ => [internal] load metadata for mcr.microsoft.com/dotnet/sdk:6.0                                                                   0.4s
+ => CACHED [build-env 1/8] FROM mcr.microsoft.com/dotnet/sdk:6.0@sha256:f6f276c7fb4cd310d784f9568bd09f7a336539bcbb48dcf63ed52dd124  0.0s
+ => [internal] load build context                                                                                                   0.0s
+ => => transferring context: 5.66kB                                                                                                 0.0s
+ => [stage-1 1/3] FROM mcr.microsoft.com/dotnet/aspnet:6.0@sha256:ae088fa9722a1e5f6e0a7c92244bbf527ee080745208950492f7df61f0b30390  0.0s
+ => [build-env 2/8] WORKDIR /src                                                                                                    0.1s
+ => [build-env 3/8] COPY [src/WebApi/WebApi.csproj, WebApi/]                                                                        0.1s
+ => [build-env 4/8] RUN dotnet restore "WebApi/WebApi.csproj"                                                                       6.8s
+ => [build-env 5/8] COPY . .                                                                                                        0.3s
+ => [build-env 6/8] WORKDIR /src/WebApi                                                                                             0.2s
+ => ERROR [build-env 7/8] RUN dotnet build "WebApi.csproj" -c Release -o /app                                                       4.2s
+------
+ > [build-env 7/8] RUN dotnet build "WebApi.csproj" -c Release -o /app:
+#0 0.610 MSBuild version 17.3.2+561848881 for .NET
+#0 1.266   Determining projects to restore...
+#0 1.612   All projects are up-to-date for restore.
+#0 4.005 CSC : error CS5001: Program does not contain a static 'Main' method suitable for an entry point [/src/WebApi/WebApi.csproj]
+#0 4.015
+#0 4.015 Build FAILED.
+#0 4.015
+#0 4.015 CSC : error CS5001: Program does not contain a static 'Main' method suitable for an entry point [/src/WebApi/WebApi.csproj]
+#0 4.016     0 Warning(s)
+#0 4.016     1 Error(s)
+#0 4.016
+#0 4.016 Time Elapsed 00:00:03.32
+------
+Dockerfile:21
+--------------------
+  19 |
+  20 |     # Step 5: Build the app in Release mode
+  21 | >>> RUN dotnet build "WebApi.csproj" -c Release -o /app
+  22 |
+  23 |     # Step 6: Publish the application in Release mode
+--------------------
+ERROR: failed to solve: process "/bin/sh -c dotnet build \"WebApi.csproj\" -c Release -o /app" did not complete successfully: exit code:1
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker build -t appcount/webapiimage:1 -f Dockerfile .
+[+] Building 1.4s (10/14)
+ => [internal] load build definition from Dockerfile                                                                                0.0s
+ => => transferring dockerfile: 1.04kB                                                                                              0.0s
+ => [internal] load .dockerignore                                                                                                   0.0s
+ => => transferring context: 2B                                                                                                     0.0s
+ => [internal] load metadata for mcr.microsoft.com/dotnet/aspnet:6.0                                                                0.5s
+ => [internal] load metadata for mcr.microsoft.com/dotnet/sdk:6.0                                                                   0.4s
+ => [build-env 1/6] FROM mcr.microsoft.com/dotnet/sdk:6.0@sha256:f6f276c7fb4cd310d784f9568bd09f7a336539bcbb48dcf63ed52dd1240bc18e   0.0s
+ => CACHED [build-env 2/6] WORKDIR /src                                                                                             0.0s
+ => [internal] load build context                                                                                                   0.0s
+ => => transferring context: 5.68kB                                                                                                 0.0s
+ => [stage-1 1/3] FROM mcr.microsoft.com/dotnet/aspnet:6.0@sha256:ae088fa9722a1e5f6e0a7c92244bbf527ee080745208950492f7df61f0b30390  0.0s
+ => [build-env 3/6] COPY . ./                                                                                                       0.2s
+ => ERROR [build-env 4/6] RUN dotnet restore "WebApi/WebApi.csproj"                                                                 0.7s
+------
+ > [build-env 4/6] RUN dotnet restore "WebApi/WebApi.csproj":
+#0 0.571 MSBUILD : error MSB1009: Project file does not exist.
+#0 0.571 Switch: WebApi/WebApi.csproj
+------
+Dockerfile:13
+--------------------
+  11 |     # Restore as distinct layers
+  12 |     #RUN dotnet restore
+  13 | >>> RUN dotnet restore "WebApi/WebApi.csproj"
+  14 |
+  15 |     # Step 4: Copy app code to the container
+--------------------
+ERROR: failed to solve: process "/bin/sh -c dotnet restore \"WebApi/WebApi.csproj\"" did not complete successfully: exit code: 1
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker build -t appcount/webapiimage:1 -f Dockerfile .
+[+] Building 17.1s (14/14) FINISHED
+ => [internal] load build definition from Dockerfile                                                                                0.1s
+ => => transferring dockerfile: 1.06kB                                                                                              0.0s
+ => [internal] load .dockerignore                                                                                                   0.2s
+ => => transferring context: 2B                                                                                                     0.0s
+ => [internal] load metadata for mcr.microsoft.com/dotnet/aspnet:6.0                                                                0.5s
+ => [internal] load metadata for mcr.microsoft.com/dotnet/sdk:6.0                                                                   0.5s
+ => [build-env 1/6] FROM mcr.microsoft.com/dotnet/sdk:6.0@sha256:f6f276c7fb4cd310d784f9568bd09f7a336539bcbb48dcf63ed52dd1240bc18e   0.0s
+ => [stage-1 1/3] FROM mcr.microsoft.com/dotnet/aspnet:6.0@sha256:ae088fa9722a1e5f6e0a7c92244bbf527ee080745208950492f7df61f0b30390  0.0s
+ => [internal] load build context                                                                                                   0.1s
+ => => transferring context: 5.70kB                                                                                                 0.0s
+ => CACHED [build-env 2/6] WORKDIR /src                                                                                             0.0s
+ => [build-env 3/6] COPY . ./                                                                                                       0.4s
+ => [build-env 4/6] RUN dotnet restore "src/WebApi/WebApi.csproj"                                                                   8.4s
+ => [build-env 5/6] RUN dotnet build "src/WebApi/WebApi.csproj" -c Release -o /app                                                  4.4s
+ => [build-env 6/6] RUN dotnet publish "src/WebApi/WebApi.csproj" -c Release -o /app                                                3.1s
+ => CACHED [stage-1 2/3] WORKDIR /App                                                                                               0.0s
+ => ERROR [stage-1 3/3] COPY --from=build-env /App/out .                                                                            0.0s
+------
+ > [stage-1 3/3] COPY --from=build-env /App/out .:
+------
+Dockerfile:35
+--------------------
+  33 |     FROM mcr.microsoft.com/dotnet/aspnet:6.0
+  34 |     WORKDIR /App
+  35 | >>> COPY --from=build-env /App/out .
+  36 |     ENTRYPOINT ["dotnet", "WebApi.dll"]
+  37 |
+--------------------
+ERROR: failed to solve: failed to compute cache key: failed to calculate checksum of ref moby::weir90dgnilo5038f6sd8wtml: failed to walk/var/lib/docker/tmp/buildkit-mount2871744960/App: lstat /var/lib/docker/tmp/buildkit-mount2871744960/App: no such file or directory
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker build -t appcount/webapiimage:1 -f Dockerfile .
+[+] Building 0.6s (6/6) FINISHED
+ => [internal] load .dockerignore                                                                                                   0.0s
+ => => transferring context: 2B                                                                                                     0.0s
+ => [internal] load build definition from Dockerfile                                                                                0.0s
+ => => transferring dockerfile: 1.07kB                                                                                              0.0s
+ => [internal] load metadata for mcr.microsoft.com/dotnet/aspnet:6.0                                                                0.5s
+ => [stage-1 1/2] FROM mcr.microsoft.com/dotnet/aspnet:6.0@sha256:ae088fa9722a1e5f6e0a7c92244bbf527ee080745208950492f7df61f0b30390  0.0s
+ => CACHED [stage-1 2/2] WORKDIR /App                                                                                               0.0s
+ => exporting to image                                                                                                              0.0s
+ => => exporting layers                                                                                                             0.0s
+ => => writing image sha256:6a5b299fc83fc0f863187e4ff22aa3425467faa4699d15d4ae9154244dcfbe10                                        0.0s
+ => => naming to docker.io/appcount/webapiimage:1                                                                                   0.0s
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ cat Dockerfile
+# Step 1: Specify your base image
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
+
+# Step 2: Copy project file to the /src container folder
+#WORKDIR /src
+WORKDIR /src
+#COPY ["src/WebApi/WebApi.csproj", "WebApi/"]
+COPY . ./
+
+# Step 3: Run a restore to download dependencies
+# Restore as distinct layers
+#RUN dotnet restore
+RUN dotnet restore "src/WebApi/WebApi.csproj"
+
+# Step 4: Copy app code to the container
+# Copy everything
+#COPY src/WebApi/bin/debug/net6.0/publish/ ./
+#COPY . .
+#WORKDIR "/src/WebApi"
+
+# Step 5: Build the app in Release mode
+RUN dotnet build "src/WebApi/WebApi.csproj" -c Release -o /app
+
+# Step 6: Publish the application in Release mode
+#RUN dotnet publish -c Release -o out
+RUN dotnet publish "src/WebApi/WebApi.csproj" -c Release -o /app
+
+# Step 7: Expose port 80 in the container
+EXPOSE 80
+
+# Step 8: Move the /app folder and run the compiled app
+# Build runtime image
+FROM mcr.microsoft.com/dotnet/aspnet:6.0
+WORKDIR /App
+#COPY --from=build-env /App/out .
+ENTRYPOINT ["dotnet", "WebApi.dll"]
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker run --name webapicontainer appcount/webapiimage:1 -p 88:7298
+The command could not be loaded, possibly because:
+  * You intended to execute a .NET application:
+      The application 'WebApi.dll' does not exist.
+  * You intended to execute a .NET SDK command:
+      No .NET SDKs were found.
+
+Download a .NET SDK:
+https://aka.ms/dotnet-download
+
+Learn about SDK resolution:
+https://aka.ms/dotnet/sdk-not-found
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker build -t appcount/webapiimage:1 -f Dockerfile .
+[+] Building 0.5s (6/6) FINISHED
+ => [internal] load build definition from Dockerfile                                                                                0.0s
+ => => transferring dockerfile: 1.07kB                                                                                              0.0s
+ => [internal] load .dockerignore                                                                                                   0.0s
+ => => transferring context: 2B                                                                                                     0.0s
+ => [internal] load metadata for mcr.microsoft.com/dotnet/aspnet:6.0                                                                0.4s
+ => [stage-1 1/2] FROM mcr.microsoft.com/dotnet/aspnet:6.0@sha256:ae088fa9722a1e5f6e0a7c92244bbf527ee080745208950492f7df61f0b30390  0.0s
+ => CACHED [stage-1 2/2] WORKDIR /App                                                                                               0.0s
+ => exporting to image                                                                                                              0.0s
+ => => exporting layers                                                                                                             0.0s
+ => => writing image sha256:6a5b299fc83fc0f863187e4ff22aa3425467faa4699d15d4ae9154244dcfbe10                                        0.0s
+ => => naming to docker.io/appcount/webapiimage:1                                                                                   0.0s
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker run --name webapicontainer appcount/webapiimage:1 -p 88:7298
+The command could not be loaded, possibly because:
+  * You intended to execute a .NET application:
+      The application 'WebApi.dll' does not exist.
+  * You intended to execute a .NET SDK command:
+      No .NET SDKs were found.
+
+Download a .NET SDK:
+https://aka.ms/dotnet-download
+
+Learn about SDK resolution:
+https://aka.ms/dotnet/sdk-not-found
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker build -t appcount/webapiimage:1 -f Dockerfile .
+[+] Building 14.7s (13/13) FINISHED
+ => [internal] load build definition from Dockerfile                                                                                0.0s
+ => => transferring dockerfile: 1.36kB                                                                                              0.0s
+ => [internal] load .dockerignore                                                                                                   0.0s
+ => => transferring context: 2B                                                                                                     0.0s
+ => [internal] load metadata for mcr.microsoft.com/dotnet/aspnet:6.0                                                                0.5s
+ => [internal] load metadata for mcr.microsoft.com/dotnet/sdk:6.0                                                                   0.4s
+ => [base 1/1] FROM mcr.microsoft.com/dotnet/aspnet:6.0@sha256:ae088fa9722a1e5f6e0a7c92244bbf527ee080745208950492f7df61f0b30390     0.0s
+ => [build 1/5] FROM mcr.microsoft.com/dotnet/sdk:6.0@sha256:f6f276c7fb4cd310d784f9568bd09f7a336539bcbb48dcf63ed52dd1240bc18e       0.0s
+ => [internal] load build context                                                                                                   0.0s
+ => => transferring context: 6.00kB                                                                                                 0.0s
+ => CACHED [build 2/5] WORKDIR /src                                                                                                 0.0s
+ => [build 3/5] COPY . ./                                                                                                           0.2s
+ => [build 4/5] RUN dotnet restore "src/WebApi/WebApi.csproj"                                                                       7.6s
+ => [build 5/5] RUN dotnet build "src/WebApi/WebApi.csproj" -c Release -o /app                                                      6.4s
+ => CACHED [final 1/2] WORKDIR /App                                                                                                 0.0s
+ => ERROR [final 2/2] COPY --from=build /App/out .                                                                                  0.0s
+------
+ > [final 2/2] COPY --from=build /App/out .:
+------
+Dockerfile:39
+--------------------
+  37 |     #This stage actually deploy to production. It is based on the base image, but with the publish assets copied in
+  38 |     WORKDIR /App
+  39 | >>> COPY --from=build /App/out .
+  40 |     ENTRYPOINT ["dotnet", "WebApi.dll"]
+  41 |
+--------------------
+ERROR: failed to solve: failed to compute cache key: failed to calculate checksum of ref moby::zu7csge6hwb91737e81ob4ige: failed to walk/var/lib/docker/tmp/buildkit-mount2568580543/App: lstat /var/lib/docker/tmp/buildkit-mount2568580543/App: no such file or directory
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker build -t appcount/webapiimage:1 -f Dockerfile .
+[+] Building 15.6s (13/13) FINISHED
+ => [internal] load build definition from Dockerfile                                                                                0.0s
+ => => transferring dockerfile: 1.47kB                                                                                              0.0s
+ => [internal] load .dockerignore                                                                                                   0.0s
+ => => transferring context: 2B                                                                                                     0.0s
+ => [internal] load metadata for mcr.microsoft.com/dotnet/aspnet:6.0                                                                0.4s
+ => [internal] load metadata for mcr.microsoft.com/dotnet/sdk:6.0                                                                   0.4s
+ => [build 1/5] FROM mcr.microsoft.com/dotnet/sdk:6.0@sha256:f6f276c7fb4cd310d784f9568bd09f7a336539bcbb48dcf63ed52dd1240bc18e       0.0s
+ => [base 1/1] FROM mcr.microsoft.com/dotnet/aspnet:6.0@sha256:ae088fa9722a1e5f6e0a7c92244bbf527ee080745208950492f7df61f0b30390     0.0s
+ => [internal] load build context                                                                                                   0.0s
+ => => transferring context: 6.11kB                                                                                                 0.0s
+ => CACHED [final 1/2] WORKDIR /App                                                                                                 0.0s
+ => CACHED [build 2/5] WORKDIR /src                                                                                                 0.0s
+ => [build 3/5] COPY . ./                                                                                                           0.2s
+ => [build 4/5] RUN dotnet restore "src/WebApi/WebApi.csproj"                                                                       9.6s
+ => [build 5/5] RUN dotnet build "src/WebApi/WebApi.csproj" -c Release -o /App/build                                                5.3s
+ => ERROR [final 2/2] COPY --from=build /App/publish .                                                                              0.0s
+------
+ > [final 2/2] COPY --from=build /App/publish .:
+------
+Dockerfile:39
+--------------------
+  37 |     #This stage actually deploy to production. It is based on the base image, but with the publish assets copied in
+  38 |     WORKDIR /App
+  39 | >>> COPY --from=build /App/publish .
+  40 |     ENTRYPOINT ["dotnet", "WebApi.dll"]
+  41 |
+--------------------
+ERROR: failed to solve: failed to compute cache key: failed to calculate checksum of ref moby::ugw7ne06o6dphvi799461wuph: "/App/publish": not found
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker build -t appcount/webapiimage:1 -f Dockerfile .
+[+] Building 17.9s (15/15) FINISHED
+ => [internal] load .dockerignore                                                                                                   0.3s
+ => => transferring context: 2B                                                                                                     0.0s
+ => [internal] load build definition from Dockerfile                                                                                0.4s
+ => => transferring dockerfile: 1.47kB                                                                                              0.0s
+ => [internal] load metadata for mcr.microsoft.com/dotnet/aspnet:6.0                                                                0.9s
+ => [internal] load metadata for mcr.microsoft.com/dotnet/sdk:6.0                                                                   0.6s
+ => [build 1/5] FROM mcr.microsoft.com/dotnet/sdk:6.0@sha256:f6f276c7fb4cd310d784f9568bd09f7a336539bcbb48dcf63ed52dd1240bc18e       0.0s
+ => [base 1/1] FROM mcr.microsoft.com/dotnet/aspnet:6.0@sha256:ae088fa9722a1e5f6e0a7c92244bbf527ee080745208950492f7df61f0b30390     0.0s
+ => [internal] load build context                                                                                                   0.1s
+ => => transferring context: 6.11kB                                                                                                 0.0s
+ => CACHED [final 1/2] WORKDIR /App                                                                                                 0.0s
+ => CACHED [build 2/5] WORKDIR /src                                                                                                 0.0s
+ => [build 3/5] COPY . ./                                                                                                           0.4s
+ => [build 4/5] RUN dotnet restore "src/WebApi/WebApi.csproj"                                                                       7.1s
+ => [build 5/5] RUN dotnet build "src/WebApi/WebApi.csproj" -c Release -o /App/build                                                6.1s
+ => [publish 1/1] RUN dotnet publish "src/WebApi/WebApi.csproj" -c Release -o /App/publish                                          2.8s
+ => [final 2/2] COPY --from=publish /App/publish .                                                                                  0.1s
+ => exporting to image                                                                                                              0.1s
+ => => exporting layers                                                                                                             0.1s
+ => => writing image sha256:c23b55155884a7704dcfb109331695b74b1158300b3055e34c412dc346f992f8                                        0.0s
+ => => naming to docker.io/appcount/webapiimage:1                                                                                   0.0s
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ cat Dockerfile
+# Step 1: Specify your base docker image that will be used to build the actual application
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+
+# Step 2: Copy project file to the /src container folder
+#WORKDIR /src
+WORKDIR /src
+#COPY ["src/WebApi/WebApi.csproj", "WebApi/"]
+COPY . ./
+
+# Step 3: Run a restore to download dependencies
+# Restore as distinct layers
+#RUN dotnet restore
+RUN dotnet restore "src/WebApi/WebApi.csproj"
+
+# Step 4: Copy app code to the container
+# Copy everything
+#COPY src/WebApi/bin/debug/net6.0/publish/ ./
+#COPY . .
+#WORKDIR "/src/WebApi"
+
+# Step 5: Build the app in Release mode
+RUN dotnet build "src/WebApi/WebApi.csproj" -c Release -o /App/build
+
+# Step 6: Publish the application in Release mode
+#This stage is used to publish your application.
+FROM build AS publish
+#RUN dotnet publish -c Release -o out
+RUN dotnet publish "src/WebApi/WebApi.csproj" -c Release -o /App/publish
+
+# Step 7: Expose port 80 in the container
+EXPOSE 80
+
+# Step 8: Move the /app folder and run the compiled app
+# This stage defines the base runtime image that will be used to run your application. It contains the minimal dependencies to run your application
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+FROM base AS final
+#This stage actually deploy to production. It is based on the base image, but with the publish assets copied in
+WORKDIR /App
+COPY --from=publish /App/publish .
+ENTRYPOINT ["dotnet", "WebApi.dll"]
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker run --name webapicontainer appcount/webapiimage:1 -p 88:7298
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://[::]:80
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /App/
+^Cinfo: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker build -t appcount/webapiimage:1 -f Dockerfile .
+[+] Building 16.2s (15/15) FINISHED
+ => [internal] load build definition from Dockerfile                                                                                0.0s
+ => => transferring dockerfile: 1.47kB                                                                                              0.0s
+ => [internal] load .dockerignore                                                                                                   0.1s
+ => => transferring context: 2B                                                                                                     0.0s
+ => [internal] load metadata for mcr.microsoft.com/dotnet/aspnet:6.0                                                                0.4s
+ => [internal] load metadata for mcr.microsoft.com/dotnet/sdk:6.0                                                                   0.4s
+ => [build 1/5] FROM mcr.microsoft.com/dotnet/sdk:6.0@sha256:f6f276c7fb4cd310d784f9568bd09f7a336539bcbb48dcf63ed52dd1240bc18e       0.0s
+ => [internal] load build context                                                                                                   0.0s
+ => => transferring context: 6.11kB                                                                                                 0.0s
+ => [base 1/1] FROM mcr.microsoft.com/dotnet/aspnet:6.0@sha256:ae088fa9722a1e5f6e0a7c92244bbf527ee080745208950492f7df61f0b30390     0.0s
+ => CACHED [build 2/5] WORKDIR /src                                                                                                 0.0s
+ => [build 3/5] COPY . ./                                                                                                           0.2s
+ => [build 4/5] RUN dotnet restore "src/WebApi/WebApi.csproj"                                                                       6.7s
+ => [build 5/5] RUN dotnet build "src/WebApi/WebApi.csproj" -c Release -o /App/build                                                5.8s
+ => [publish 1/1] RUN dotnet publish "src/WebApi/WebApi.csproj" -c Release -o /App/publish                                          2.9s
+ => CACHED [final 1/2] WORKDIR /App                                                                                                 0.0s
+ => CACHED [final 2/2] COPY --from=publish /App/publish .                                                                           0.0s
+ => exporting to image                                                                                                              0.0s
+ => => exporting layers                                                                                                             0.0s
+ => => writing image sha256:c23b55155884a7704dcfb109331695b74b1158300b3055e34c412dc346f992f8                                        0.0s
+ => => naming to docker.io/appcount/webapiimage:1                                                                                   0.0s
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker run --name webapicontainer appcount/webapiimage:1 -p 88:7298
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://[::]:80
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /App/
+^Z
+[1]+  Stopped                 docker run --name webapicontainer appcount/webapiimage:1 -p 88:7298
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ cat Dockerfile
+# Step 1: Specify your base docker image that will be used to build the actual application
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+
+# Step 2: Copy project file to the /src container folder
+#WORKDIR /src
+WORKDIR /src
+#COPY ["src/WebApi/WebApi.csproj", "WebApi/"]
+COPY . ./
+
+# Step 3: Run a restore to download dependencies
+# Restore as distinct layers
+#RUN dotnet restore
+RUN dotnet restore "src/WebApi/WebApi.csproj"
+
+# Step 4: Copy app code to the container
+# Copy everything
+#COPY src/WebApi/bin/debug/net6.0/publish/ ./
+#COPY . .
+#WORKDIR "/src/WebApi"
+
+# Step 5: Build the app in Release mode
+RUN dotnet build "src/WebApi/WebApi.csproj" -c Release -o /App/build
+
+# Step 6: Publish the application in Release mode
+#This stage is used to publish your application.
+FROM build AS publish
+#RUN dotnet publish -c Release -o out
+RUN dotnet publish "src/WebApi/WebApi.csproj" -c Release -o /App/publish
+
+# Step 7: Expose port 80 in the container
+EXPOSE 88
+
+# Step 8: Move the /app folder and run the compiled app
+# This stage defines the base runtime image that will be used to run your application. It contains the minimal dependencies to run your application
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+FROM base AS final
+#This stage actually deploy to production. It is based on the base image, but with the publish assets copied in
+WORKDIR /App
+COPY --from=publish /App/publish .
+ENTRYPOINT ["dotnet", "WebApi.dll"]
+
+
+#Multi-stage builds are always best-practice when you're deploying to Docker, but this one is more complex than it needs to be in general. It has additional stages to make it quicker for Visual Studio to develop inside Docker images too, using "fast mode". If you're only deploying to Docker, not developing in Docker, then you can simplify this file.
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker build -t appcount/webapiimage:1 -f Dockerfile .
+[+] Building 16.7s (15/15) FINISHED
+ => [internal] load .dockerignore                                                                                                   0.0s
+ => => transferring context: 2B                                                                                                     0.0s
+ => [internal] load build definition from Dockerfile                                                                                0.0s
+ => => transferring dockerfile: 1.83kB                                                                                              0.0s
+ => [internal] load metadata for mcr.microsoft.com/dotnet/aspnet:6.0                                                                0.4s
+ => [internal] load metadata for mcr.microsoft.com/dotnet/sdk:6.0                                                                   0.4s
+ => [build 1/5] FROM mcr.microsoft.com/dotnet/sdk:6.0@sha256:f6f276c7fb4cd310d784f9568bd09f7a336539bcbb48dcf63ed52dd1240bc18e       0.0s
+ => [base 1/1] FROM mcr.microsoft.com/dotnet/aspnet:6.0@sha256:ae088fa9722a1e5f6e0a7c92244bbf527ee080745208950492f7df61f0b30390     0.0s
+ => [internal] load build context                                                                                                   0.0s
+ => => transferring context: 6.46kB                                                                                                 0.0s
+ => CACHED [build 2/5] WORKDIR /src                                                                                                 0.0s
+ => [build 3/5] COPY . ./                                                                                                           0.2s
+ => [build 4/5] RUN dotnet restore "src/WebApi/WebApi.csproj"                                                                       8.0s
+ => [build 5/5] RUN dotnet build "src/WebApi/WebApi.csproj" -c Release -o /App/build                                                4.7s
+ => [publish 1/1] RUN dotnet publish "src/WebApi/WebApi.csproj" -c Release -o /App/publish                                          3.3s
+ => CACHED [final 1/2] WORKDIR /App                                                                                                 0.0s
+ => CACHED [final 2/2] COPY --from=publish /App/publish .                                                                           0.0s
+ => exporting to image                                                                                                              0.0s
+ => => exporting layers                                                                                                             0.0s
+ => => writing image sha256:c23b55155884a7704dcfb109331695b74b1158300b3055e34c412dc346f992f8                                        0.0s
+ => => naming to docker.io/appcount/webapiimage:1                                                                                   0.0s
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker run --name webapicontainer appcount/webapiimage:1 -p 88:7298
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://[::]:80
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /App/
+^Cinfo: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker run -p 88:7298 --name webapicontainer appcount/webapiimage:1
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://[::]:80
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Production
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /App/
+^Cinfo: Microsoft.Hosting.Lifetime[0]
+      Application is shutting down...
+
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$ docker inspect df8d150c6841
+[
+    {
+        "Id": "df8d150c684115717729755ef1a86ee5262fff469c4f91bf468b55012e95a6c6",
+        "Created": "2023-05-06T16:27:43.188549777Z",
+        "Path": "dotnet",
+        "Args": [
+            "WebApi.dll"
+        ],
+        "State": {
+            "Status": "exited",
+            "Running": false,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 0,
+            "ExitCode": 0,
+            "Error": "",
+            "StartedAt": "2023-05-06T16:27:43.925308445Z",
+            "FinishedAt": "2023-05-06T17:48:24.5541471Z"
+        },
+        "Image": "sha256:c23b55155884a7704dcfb109331695b74b1158300b3055e34c412dc346f992f8",
+        "ResolvConfPath": "/var/lib/docker/containers/df8d150c684115717729755ef1a86ee5262fff469c4f91bf468b55012e95a6c6/resolv.conf",
+        "HostnamePath": "/var/lib/docker/containers/df8d150c684115717729755ef1a86ee5262fff469c4f91bf468b55012e95a6c6/hostname",
+        "HostsPath": "/var/lib/docker/containers/df8d150c684115717729755ef1a86ee5262fff469c4f91bf468b55012e95a6c6/hosts",
+        "LogPath": "/var/lib/docker/containers/df8d150c684115717729755ef1a86ee5262fff469c4f91bf468b55012e95a6c6/df8d150c684115717729755ef1a86ee5262fff469c4f91bf468b55012e95a6c6-json.log",
+        "Name": "/webapicontainer",
+        "RestartCount": 0,
+        "Driver": "overlay2",
+        "Platform": "linux",
+        "MountLabel": "",
+        "ProcessLabel": "",
+        "AppArmorProfile": "",
+        "ExecIDs": null,
+        "HostConfig": {
+            "Binds": null,
+            "ContainerIDFile": "",
+            "LogConfig": {
+                "Type": "json-file",
+                "Config": {}
+            },
+            "NetworkMode": "default",
+            "PortBindings": {
+                "7298/tcp": [
+                    {
+                        "HostIp": "",
+                        "HostPort": "88"
+                    }
+                ]
+            },
+            "RestartPolicy": {
+                "Name": "no",
+                "MaximumRetryCount": 0
+            },
+            "AutoRemove": false,
+            "VolumeDriver": "",
+            "VolumesFrom": null,
+            "ConsoleSize": [
+                37,
+                137
+            ],
+            "CapAdd": null,
+            "CapDrop": null,
+            "CgroupnsMode": "host",
+            "Dns": [],
+            "DnsOptions": [],
+            "DnsSearch": [],
+            "ExtraHosts": null,
+            "GroupAdd": null,
+            "IpcMode": "private",
+            "Cgroup": "",
+            "Links": null,
+            "OomScoreAdj": 0,
+            "PidMode": "",
+            "Privileged": false,
+            "PublishAllPorts": false,
+            "ReadonlyRootfs": false,
+            "SecurityOpt": null,
+            "UTSMode": "",
+            "UsernsMode": "",
+            "ShmSize": 67108864,
+            "Runtime": "runc",
+            "Isolation": "",
+            "CpuShares": 0,
+            "Memory": 0,
+            "NanoCpus": 0,
+            "CgroupParent": "",
+            "BlkioWeight": 0,
+            "BlkioWeightDevice": [],
+            "BlkioDeviceReadBps": [],
+            "BlkioDeviceWriteBps": [],
+            "BlkioDeviceReadIOps": [],
+            "BlkioDeviceWriteIOps": [],
+            "CpuPeriod": 0,
+            "CpuQuota": 0,
+            "CpuRealtimePeriod": 0,
+            "CpuRealtimeRuntime": 0,
+            "CpusetCpus": "",
+            "CpusetMems": "",
+            "Devices": [],
+            "DeviceCgroupRules": null,
+            "DeviceRequests": null,
+            "MemoryReservation": 0,
+            "MemorySwap": 0,
+            "MemorySwappiness": null,
+            "OomKillDisable": false,
+            "PidsLimit": null,
+            "Ulimits": null,
+            "CpuCount": 0,
+            "CpuPercent": 0,
+            "IOMaximumIOps": 0,
+            "IOMaximumBandwidth": 0,
+            "MaskedPaths": [
+                "/proc/asound",
+                "/proc/acpi",
+                "/proc/kcore",
+                "/proc/keys",
+                "/proc/latency_stats",
+                "/proc/timer_list",
+                "/proc/timer_stats",
+                "/proc/sched_debug",
+                "/proc/scsi",
+                "/sys/firmware"
+            ],
+            "ReadonlyPaths": [
+                "/proc/bus",
+                "/proc/fs",
+                "/proc/irq",
+                "/proc/sys",
+                "/proc/sysrq-trigger"
+            ]
+        },
+        "GraphDriver": {
+            "Data": {
+                "LowerDir": "/var/lib/docker/overlay2/efcef31c342b3a5350c35d96224a866e341aa71dc49460069b58d13db5aa29cf-init/diff:/var/lib/docker/overlay2/63lbdcdyrpjg3axjbjwoubz1r/diff:/var/lib/docker/overlay2/s706rnte9kg7c8u4ic02e4wds/diff:/var/lib/docker/overlay2/59d88fe4798fce0c0df189cd47c1147aa1e4a911bcf40fbf5cc9bbb7df29edfb/diff:/var/lib/docker/overlay2/ee39679cbf4574814ec922453b8cd8861affd1210f9056d840211c6ea4400fef/diff:/var/lib/docker/overlay2/ed43753a771db91c0a8b2a1661e45f05297a877a6255b15af1f25fbab96d7735/diff:/var/lib/docker/overlay2/85bc8ae6494460dc4340ce8e7d7482f4426e608cdd88e2c414754b93a2bbf5cc/diff:/var/lib/docker/overlay2/ccc7741d78b6ebd31ceaf908d5a581aaa437b09155079166cd6055e7fd857c71/diff",
+                "MergedDir": "/var/lib/docker/overlay2/efcef31c342b3a5350c35d96224a866e341aa71dc49460069b58d13db5aa29cf/merged",
+                "UpperDir": "/var/lib/docker/overlay2/efcef31c342b3a5350c35d96224a866e341aa71dc49460069b58d13db5aa29cf/diff",
+                "WorkDir": "/var/lib/docker/overlay2/efcef31c342b3a5350c35d96224a866e341aa71dc49460069b58d13db5aa29cf/work"
+            },
+            "Name": "overlay2"
+        },
+        "Mounts": [],
+        "Config": {
+            "Hostname": "df8d150c6841",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": true,
+            "AttachStderr": true,
+            "ExposedPorts": {
+                "7298/tcp": {}
+            },
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "ASPNETCORE_URLS=http://+:80",
+                "DOTNET_RUNNING_IN_CONTAINER=true",
+                "DOTNET_VERSION=6.0.16",
+                "ASPNET_VERSION=6.0.16"
+            ],
+            "Cmd": null,
+            "Image": "appcount/webapiimage:1",
+            "Volumes": null,
+            "WorkingDir": "/App",
+            "Entrypoint": [
+                "dotnet",
+                "WebApi.dll"
+            ],
+            "OnBuild": null,
+            "Labels": {
+                "desktop.docker.io/wsl-distro": "Ubuntu-22.04"
+            }
+        },
+        "NetworkSettings": {
+            "Bridge": "",
+            "SandboxID": "a62261a73363c145e0da6973219700991edc9040b6aa7665ad14aaedf1dacb78",
+            "HairpinMode": false,
+            "LinkLocalIPv6Address": "",
+            "LinkLocalIPv6PrefixLen": 0,
+            "Ports": {},
+            "SandboxKey": "/var/run/docker/netns/a62261a73363",
+            "SecondaryIPAddresses": null,
+            "SecondaryIPv6Addresses": null,
+            "EndpointID": "",
+            "Gateway": "",
+            "GlobalIPv6Address": "",
+            "GlobalIPv6PrefixLen": 0,
+            "IPAddress": "",
+            "IPPrefixLen": 0,
+            "IPv6Gateway": "",
+            "MacAddress": "",
+            "Networks": {
+                "bridge": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "NetworkID": "f2655442ac49ad7f0f0b7eaeab1fa0f37cf3321810c7025ecf207652bc5a713a",
+                    "EndpointID": "",
+                    "Gateway": "",
+                    "IPAddress": "",
+                    "IPPrefixLen": 0,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "MacAddress": "",
+                    "DriverOpts": null
+                }
+            }
+        }
+    }
+]
+wsllinux@HomeTechPAD:~/dotnetProjects/WebApi$

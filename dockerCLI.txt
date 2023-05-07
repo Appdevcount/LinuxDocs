@@ -1,0 +1,56 @@
+<3>WSL (3669) ERROR: CreateProcessEntryCommon:357: getpwnam(myusername) failed 0
+wsllinux@HomeTechPAD:~$ #docker rmi [image] #remove an image from docker local
+wsllinux@HomeTechPAD:~$ docker ps -a
+CONTAINER ID   IMAGE          COMMAND                  CREATED        STATUS                    PORTS     NAMES
+f276b736db8e   7cfbbec8963d   "sh"                     16 hours ago   Exited (0) 16 hours ago             intelligent_burnell
+55ce8932220c   node           "docker-entrypoint.s…"   16 hours ago   Exited (0) 16 hours ago             dreamy_germain
+d9da1d7c9daf   node           "docker-entrypoint.s…"   16 hours ago   Exited (0) 16 hours ago             sleepy_faraday
+wsllinux@HomeTechPAD:~$ docker rmi d9da1d7c
+Error response from daemon: No such image: d9da1d7c:latest
+wsllinux@HomeTechPAD:~$ docker images
+REPOSITORY   TAG       IMAGE ID       CREATED        SIZE
+node         latest    acd15857ce39   38 hours ago   1GB
+wsllinux@HomeTechPAD:~$ docker pull busybox
+Using default tag: latest
+latest: Pulling from library/busybox
+4b35f584bb4f: Already exists
+Digest: sha256:b5d6fe0712636ceb7430189de28819e195e8966372edfc2d9409d79402a0dc16
+Status: Downloaded newer image for busybox:latest
+docker.io/library/busybox:latest
+wsllinux@HomeTechPAD:~$ docker pull busybox --name busybox1
+unknown flag: --name
+See 'docker pull --help'.
+wsllinux@HomeTechPAD:~$ docker pull busybox -name busybox1
+unknown shorthand flag: 'n' in -name
+See 'docker pull --help'.
+wsllinux@HomeTechPAD:~$ docker images
+REPOSITORY   TAG       IMAGE ID       CREATED        SIZE
+node         latest    acd15857ce39   38 hours ago   1GB
+busybox      latest    7cfbbec8963d   7 weeks ago    4.86MB
+wsllinux@HomeTechPAD:~$ docker rmi busybox #removes busybox image from local
+Error response from daemon: conflict: unable to remove repository reference "busybox" (must force) - container f276b736db8e is using itsreferenced image 7cfbbec8963d
+wsllinux@HomeTechPAD:~$ docker ps -a
+CONTAINER ID   IMAGE     COMMAND                  CREATED        STATUS                    PORTS     NAMES
+f276b736db8e   busybox   "sh"                     16 hours ago   Exited (0) 16 hours ago             intelligent_burnell
+55ce8932220c   node      "docker-entrypoint.s…"   16 hours ago   Exited (0) 16 hours ago             dreamy_germain
+d9da1d7c9daf   node      "docker-entrypoint.s…"   16 hours ago   Exited (0) 16 hours ago             sleepy_faraday
+wsllinux@HomeTechPAD:~$ docker rm f276b736d
+f276b736d
+wsllinux@HomeTechPAD:~$ docker rmi busybox # remove the using container before reming the image from docker local
+Untagged: busybox:latest
+Untagged: busybox@sha256:b5d6fe0712636ceb7430189de28819e195e8966372edfc2d9409d79402a0dc16
+Deleted: sha256:7cfbbec8963d8f13e6c70416d6592e1cc10f47a348131290a55d43c3acab3fb9
+Deleted: sha256:baacf561cfff825708763ce7ee4a18293716c533e6ece3bd39009a5fb3c804d2
+wsllinux@HomeTechPAD:~$ docker ps -a
+CONTAINER ID   IMAGE     COMMAND                  CREATED        STATUS                    PORTS     NAMES
+55ce8932220c   node      "docker-entrypoint.s…"   16 hours ago   Exited (0) 16 hours ago             dreamy_germain
+d9da1d7c9daf   node      "docker-entrypoint.s…"   16 hours ago   Exited (0) 16 hours ago             sleepy_faraday
+wsllinux@HomeTechPAD:~$ docker images
+REPOSITORY   TAG       IMAGE ID       CREATED        SIZE
+node         latest    acd15857ce39   39 hours ago   1GB
+wsllinux@HomeTechPAD:~$ docker rm d9da1d7c9
+d9da1d7c9
+wsllinux@HomeTechPAD:~$ docker ps -a
+CONTAINER ID   IMAGE     COMMAND                  CREATED        STATUS                    PORTS     NAMES
+55ce8932220c   node      "docker-entrypoint.s…"   16 hours ago   Exited (0) 16 hours ago             dreamy_germain
+wsllinux@HomeTechPAD:~$

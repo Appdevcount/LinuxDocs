@@ -1,0 +1,23 @@
+<3>WSL (1814) ERROR: CreateProcessEntryCommon:357: getpwnam(myusername) failed 0
+wsllinux@HomeTechPAD:~$ cd dotnetprojects
+-bash: cd: dotnetprojects: No such file or directory
+wsllinux@HomeTechPAD:~$ cd dotnetProjects
+wsllinux@HomeTechPAD:~/dotnetProjects$ #Can login to docker hub from CLI using => docker login -u username -p password
+wsllinux@HomeTechPAD:~/dotnetProjects$ docker login -u appcount -p Coool@123
+
+The command 'docker' could not be found in this WSL 2 distro.
+We recommend to activate the WSL integration in Docker Desktop settings.
+
+For details about using Docker Desktop with WSL 2, visit:
+
+https://docs.docker.com/go/wsl2/
+
+wsllinux@HomeTechPAD:~/dotnetProjects$ docker login -u appcount -p Coool@123
+WARNING! Using --password via the CLI is insecure. Use --password-stdin.
+
+Coool@12Login Succeeded
+3
+Logging in with your password grants your terminal complete access to your account.
+For better security, log in with a limited-privilege personal access token. Learn more at https://docs.docker.com/go/access-tokens/
+wsllinux@HomeTechPAD:~/dotnetProjects$
+wsllinux@HomeTechPAD:~/dotnetProjects$
